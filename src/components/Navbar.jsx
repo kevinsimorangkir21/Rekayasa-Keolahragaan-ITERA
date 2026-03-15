@@ -83,9 +83,9 @@ export default function Navbar() {
           {/* LOGO */}
           <Link href="/" className="flex items-center">
             <motion.img
-              src="/logo.png"
+              src="/RekayasaKeolahragaan.png"
               alt="Logo"
-              className="w-10 h-10"
+              className="w-25 h-25"
               whileHover={{ rotate: 6, scale: 1.05 }}
             />
           </Link>

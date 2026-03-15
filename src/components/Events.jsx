@@ -10,7 +10,7 @@ export default function Events() {
 
   const events = [
     {
-      title: "Seminar Nasional Biomekanika Olahraga 2024",
+      title: "Seminar Nasional Biomekanika Olahraga",
       date: "2024-12-15T09:00:00",
       location: "Aula Utama ITERA",
       img: "https://images.unsplash.com/photo-1605296867304-46d5465a13f1",
@@ -69,50 +69,60 @@ export default function Events() {
           </h2>
 
           <p className="text-gray-600 max-w-2xl mx-auto mt-4">
-            Ikuti kesempatan berharga untuk berkembang dalam dunia rekayasa olahraga.
+            Ikuti berbagai kegiatan akademik dan seminar Rekayasa Keolahragaan.
           </p>
         </div>
 
-        {/* EVENTS GRID */}
+        {/* GRID */}
         <div className="grid md:grid-cols-3 gap-8">
-          {events.map((item, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: i * 0.1 }}
-              viewport={{ once: true }}
-              className="
-                bg-white rounded-2xl overflow-hidden shadow-md
-                hover:shadow-xl hover:-translate-y-2
-                transition duration-300 cursor-pointer
-              "
-              onClick={() => {
-                setSelectedEvent(item);
-                setTimeLeft(null);
-              }}
-            >
-              <div
-                className="h-48 bg-cover bg-center"
-                style={{ backgroundImage: `url(${item.img})` }}
-              />
+          {events.map((item, i) => {
+            const eventDate = new Date(item.date);
 
-              <div className="p-6 text-left">
-                <div className="flex items-center gap-2 text-sm text-orange-600 font-medium">
-                  <CalendarDays size={16} />
-                  <span>{new Date(item.date).toLocaleDateString()}</span>
+            return (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: i * 0.1 }}
+                viewport={{ once: true }}
+                className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl hover:-translate-y-2 transition cursor-pointer"
+                onClick={() => {
+                  setSelectedEvent(item);
+                  setTimeLeft(null);
+                }}
+              >
+                <div
+                  className="h-48 bg-cover bg-center"
+                  style={{ backgroundImage: `url(${item.img})` }}
+                />
+
+                <div className="p-6 flex gap-4">
+
+                  {/* DATE BADGE */}
+                  <div className="bg-orange-600 text-white rounded-xl px-4 py-3 text-center min-w-[70px]">
+                    <div className="text-xl font-bold">
+                      {eventDate.getDate()}
+                    </div>
+                    <div className="text-xs uppercase">
+                      {eventDate.toLocaleString("default", { month: "short" })}
+                    </div>
+                  </div>
+
+                  {/* EVENT INFO */}
+                  <div>
+                    <h3 className="font-semibold text-lg text-gray-900">
+                      {item.title}
+                    </h3>
+
+                    <p className="text-sm text-gray-500 mt-2 flex items-center gap-1">
+                      <MapPin size={14} /> {item.location}
+                    </p>
+                  </div>
+
                 </div>
-
-                <h3 className="mt-2 font-semibold text-lg text-gray-900">
-                  {item.title}
-                </h3>
-
-                <p className="text-xs text-gray-500 mt-1 flex items-center gap-1">
-                  <MapPin size={14} /> {item.location}
-                </p>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            );
+          })}
         </div>
       </div>
 
@@ -128,9 +138,9 @@ export default function Events() {
           >
             <motion.div
               className="bg-white rounded-2xl p-6 max-w-lg w-full shadow-xl relative"
-              initial={{ scale: 0.85, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.85, opacity: 0 }}
+              initial={{ scale: 0.85 }}
+              animate={{ scale: 1 }}
+              exit={{ scale: 0.85 }}
               onClick={(e) => e.stopPropagation()}
             >
               <button
@@ -159,7 +169,7 @@ export default function Events() {
                 <div className="grid grid-cols-4 gap-2 text-center mt-6">
                   {Object.entries(timeLeft).map(([k, v]) => (
                     <div key={k} className="bg-orange-600 text-white rounded-xl py-2">
-                      <div className="text-lg md:text-2xl font-bold">{v}</div>
+                      <div className="text-lg font-bold">{v}</div>
                       <div className="text-[10px] uppercase">{k}</div>
                     </div>
                   ))}

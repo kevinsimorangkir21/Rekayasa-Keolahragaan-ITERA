@@ -8,47 +8,58 @@ export default function Stats() {
   ];
 
   return (
-    <section className="relative py-28 overflow-hidden bg-gray-50 text-gray-900">
-      <div className="max-w-6xl mx-auto px-6 text-center relative z-10">
+    <section className="relative py-28 overflow-hidden bg-gradient-to-r from-orange-500 to-orange-600 text-white">
+      <div className="max-w-6xl mx-auto px-6 relative z-10">
 
-        {/* TITLE */}
-        <h2 className="text-3xl md:text-4xl font-extrabold text-orange-600">
-          Sports Engineering People
-        </h2>
+        <div className="grid md:grid-cols-2 gap-16 items-center">
 
-        {/* SUBTITLE */}
-        <p className="text-gray-600 max-w-2xl mx-auto mt-4 mb-14">
-          Komunitas mahasiswa & dosen yang berperan aktif dalam pengembangan
-          rekayasa olahraga di Indonesia.
-        </p>
+          {/* LEFT CONTENT */}
+          <div>
 
-        {/* STATS */}
-        <div className="grid grid-cols-2 gap-10">
-          {stats.map((item, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: i * 0.1 }}
-              viewport={{ once: true }}
-              className="flex flex-col items-center"
-            >
-              <span className="text-6xl md:text-7xl font-extrabold text-orange-600">
-                {item.value}
-              </span>
+            <h2 className="text-3xl md:text-4xl font-extrabold">
+              Sports Engineering People
+            </h2>
 
-              <span className="mt-3 text-lg font-medium text-gray-700">
-                {item.label}
-              </span>
-            </motion.div>
-          ))}
+            <p className="mt-5 leading-relaxed text-orange-100 max-w-lg">
+              Komunitas mahasiswa dan dosen yang berperan aktif dalam
+              pengembangan rekayasa olahraga di Indonesia melalui inovasi
+              teknologi, sport science, dan penelitian di bidang olahraga.
+            </p>
+
+          </div>
+
+          {/* RIGHT CARDS */}
+          <div className="grid grid-cols-2 gap-8">
+
+            {stats.map((item, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 25 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: i * 0.1 }}
+                viewport={{ once: true }}
+                className="bg-white rounded-2xl shadow-lg p-8 text-center
+                hover:shadow-xl hover:-translate-y-1 transition"
+              >
+                <div className="text-5xl md:text-6xl font-extrabold text-orange-600">
+                  {item.value}
+                </div>
+
+                <div className="mt-3 text-gray-700 font-medium">
+                  {item.label}
+                </div>
+              </motion.div>
+            ))}
+
+          </div>
+
         </div>
       </div>
 
-      {/* WAVE BAWAH */}
+      {/* Wave */}
       <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-[0]">
         <svg
-          className="relative block w-full h-24 text-gray-50"
+          className="relative block w-full h-24 text-orange-500"
           xmlns="http://www.w3.org/2000/svg"
           preserveAspectRatio="none"
           viewBox="0 0 1200 120"
@@ -63,6 +74,7 @@ export default function Stats() {
           />
         </svg>
       </div>
+
     </section>
   );
 }

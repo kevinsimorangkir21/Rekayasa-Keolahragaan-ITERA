@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { CalendarDays, ArrowRight } from "lucide-react";
 
 export default function News() {
   const news = [
@@ -32,53 +33,75 @@ export default function News() {
     <section className="bg-gray-50 py-28">
       <div className="max-w-6xl mx-auto px-6">
 
-        {/* TITLE */}
-        <div className="text-center mb-14">
-          <h2 className="text-3xl md:text-4xl font-extrabold text-orange-600">
-            Berita Terbaru
-          </h2>
+        {/* HEADER */}
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14">
 
-          <p className="text-gray-600 max-w-2xl mx-auto mt-4">
-            Info terkini seputar kegiatan dan inovasi Rekayasa Keolahragaan
-          </p>
+          <div>
+            <h2 className="text-3xl md:text-4xl font-extrabold text-orange-600">
+              Berita Terbaru
+            </h2>
+
+            <p className="text-gray-600 mt-3 max-w-xl">
+              Informasi terbaru seputar kegiatan, penelitian, dan inovasi
+              Program Studi Rekayasa Keolahragaan ITERA.
+            </p>
+          </div>
+
+          <Link
+            href="/berita"
+            className="inline-flex items-center gap-2 text-orange-600 font-semibold hover:gap-3 transition"
+          >
+            Lihat Semua Berita
+            <ArrowRight size={18} />
+          </Link>
+
         </div>
 
-        {/* CARDS */}
+        {/* NEWS GRID */}
         <div className="grid md:grid-cols-3 gap-8">
+
           {news.map((item, i) => (
-            <Link key={i} href={`/news/${item.slug}`}>
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
+            <Link key={i} href={`/berita/${item.slug}`}>
+              <motion.article
+                initial={{ opacity: 0, y: 35 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: i * 0.1 }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
                 viewport={{ once: true }}
-                className="
-                  bg-white rounded-2xl overflow-hidden shadow-md
-                  hover:shadow-xl hover:-translate-y-2
-                  transition duration-300 group
-                "
+                className="bg-white rounded-2xl overflow-hidden shadow-md
+                hover:shadow-xl hover:-translate-y-2 transition duration-300 group h-full flex flex-col"
               >
+
+                {/* IMAGE */}
                 <div
-                  className="h-48 bg-cover bg-center group-hover:scale-105 transition-transform duration-300"
+                  className="h-48 bg-cover bg-center group-hover:scale-105 transition-transform duration-500"
                   style={{ backgroundImage: `url(${item.img})` }}
                 />
 
-                <div className="p-6">
-                  <span className="text-xs font-semibold bg-orange-600 text-white px-2 py-1 rounded-full">
+                {/* CONTENT */}
+                <div className="p-6 flex flex-col flex-1">
+
+                  {/* TAG */}
+                  <span className="text-xs font-semibold bg-orange-600 text-white px-3 py-1 rounded-full w-fit">
                     {item.tag}
                   </span>
 
-                  <h3 className="mt-3 font-semibold text-lg text-gray-900 group-hover:text-orange-600 transition">
+                  {/* TITLE */}
+                  <h3 className="mt-4 font-semibold text-lg text-gray-900 group-hover:text-orange-600 transition line-clamp-2">
                     {item.title}
                   </h3>
 
-                  <p className="text-xs text-gray-500 mt-1">
+                  {/* DATE */}
+                  <div className="flex items-center gap-2 text-sm text-gray-500 mt-auto pt-4">
+                    <CalendarDays size={16} />
                     {item.date}
-                  </p>
+                  </div>
+
                 </div>
-              </motion.div>
+
+              </motion.article>
             </Link>
           ))}
+
         </div>
 
       </div>
