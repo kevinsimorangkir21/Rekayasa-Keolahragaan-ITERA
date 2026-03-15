@@ -1,13 +1,30 @@
 "use client";
 
 import Link from "next/link";
-import { Github, Linkedin, Instagram, Youtube } from "lucide-react";
+import { Instagram, Linkedin, Youtube, Mail, MapPin, ArrowUp } from "lucide-react";
+import { useState, useEffect } from "react";
 
 export default function Footer() {
+
+  const [showTop, setShowTop] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowTop(window.scrollY > 300);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const scrollTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
     <footer className="relative overflow-hidden bg-gray-50 text-gray-700 pt-20 pb-10 border-t border-gray-200">
 
-      {/* Wave Top */}
+      {/* Wave */}
       <div className="absolute top-0 left-0 w-full overflow-hidden leading-[0] rotate-180">
         <svg
           className="relative block w-full h-20 text-gray-50"
@@ -26,91 +43,180 @@ export default function Footer() {
         </svg>
       </div>
 
-      {/* Content */}
-      <div className="relative max-w-6xl mx-auto px-6 grid md:grid-cols-3 gap-12">
+      {/* CONTENT */}
+      <div className="relative max-w-6xl mx-auto px-6 grid md:grid-cols-4 gap-12">
 
-        {/* Brand */}
+        {/* BRAND */}
         <div>
           <div className="flex items-center gap-3 mb-4">
-            <img src="/logo.png" alt="REKO" className="w-10 h-10" />
-            <span className="text-lg font-bold text-orange-600">
-              Sports Engineering ITERA
-            </span>
+            <img src="/RekayasaKeolahragaan.png" alt="REKO" className="w-25 h-25" />
           </div>
 
-          <p className="text-sm leading-relaxed">
-            Mengembangkan talenta unggul dalam teknologi olahraga untuk
-            meningkatkan performa dan inovasi sport science di Indonesia.
+          <p className="text-sm text-gray-600 leading-relaxed">
+            Program Studi Rekayasa Keolahragaan Institut Teknologi Sumatera
+            berfokus pada pengembangan teknologi olahraga, sport science,
+            serta inovasi rekayasa untuk meningkatkan performa atlet dan industri olahraga.
           </p>
         </div>
 
-        {/* Navigation */}
+        {/* NAVIGASI */}
         <div>
           <h4 className="font-semibold text-orange-600 mb-4">
             Navigasi
           </h4>
 
           <ul className="space-y-2 text-sm">
-            {[
-              { name: "Beranda", url: "/" },
-              { name: "Profil Prodi", url: "/profile" },
-              { name: "Prestasi", url: "/achievement" },
-              { name: "Event", url: "/events" },
-              { name: "Kontak", url: "/contact" },
-            ].map((item) => (
-              <li key={item.name}>
-                <Link
-                  href={item.url}
-                  className="hover:text-orange-600 transition-colors"
-                >
-                  {item.name}
-                </Link>
-              </li>
-            ))}
+
+            <li>
+              <Link href="/" className="hover:text-orange-600">
+                Beranda
+              </Link>
+            </li>
+
+            <li>
+              <Link href="/profil/sejarah" className="hover:text-orange-600">
+                Sejarah
+              </Link>
+            </li>
+
+            <li>
+              <Link href="/profil/visi-misi" className="hover:text-orange-600">
+                Visi & Misi
+              </Link>
+            </li>
+
+            <li>
+              <Link href="/profil/staff-dosen" className="hover:text-orange-600">
+                Staff Dosen
+              </Link>
+            </li>
+
+            <li>
+              <Link href="/profil/prestasi-mahasiswa" className="hover:text-orange-600">
+                Prestasi Mahasiswa
+              </Link>
+            </li>
+
+            <li>
+              <Link href="/berita" className="hover:text-orange-600">
+                Berita
+              </Link>
+            </li>
+
           </ul>
         </div>
 
-        {/* Social */}
+        {/* QUICK LINKS */}
         <div>
           <h4 className="font-semibold text-orange-600 mb-4">
-            Terhubung
+            Quick Links
           </h4>
 
-          <p className="text-sm mb-4">
-            Ikuti kami di media sosial:
-          </p>
+          <ul className="space-y-2 text-sm">
 
-          <div className="flex gap-4">
-            {[
-              { icon: <Instagram size={20} />, url: "#" },
-              { icon: <Linkedin size={20} />, url: "#" },
-              { icon: <Youtube size={20} />, url: "#" },
-              { icon: <Github size={20} />, url: "#" },
-            ].map(({ icon, url }, i) => (
-              <a
-                key={i}
-                href={url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="
-                  w-10 h-10 flex items-center justify-center
-                  rounded-full border border-gray-300
-                  hover:bg-orange-600 hover:text-white
-                  transition duration-300
-                "
-              >
-                {icon}
-              </a>
-            ))}
+            <li>
+              <Link href="/akademik/kurikulum" className="hover:text-orange-600">
+                Kurikulum
+              </Link>
+            </li>
+
+            <li>
+              <Link href="/akademik/kerja-praktik" className="hover:text-orange-600">
+                Kerja Praktik
+              </Link>
+            </li>
+
+            <li>
+              <Link href="/akademik/kuliah-kerja-nyata" className="hover:text-orange-600">
+                Kuliah Kerja Nyata
+              </Link>
+            </li>
+
+            <li>
+              <Link href="/layanan/pmb" className="hover:text-orange-600">
+                Penerimaan Mahasiswa Baru
+              </Link>
+            </li>
+
+            <li>
+              <Link href="/fasilitas/perpustakaan" className="hover:text-orange-600">
+                Perpustakaan
+              </Link>
+            </li>
+
+          </ul>
+        </div>
+
+        {/* CONTACT */}
+        <div>
+          <h4 className="font-semibold text-orange-600 mb-4">
+            Kontak
+          </h4>
+
+          <div className="space-y-3 text-sm text-gray-600">
+
+            <div className="flex gap-2 items-start">
+              <MapPin size={16} className="mt-1" />
+              <span>
+                Institut Teknologi Sumatera  
+                Lampung Selatan, Indonesia
+              </span>
+            </div>
+
+            <div className="flex gap-2 items-center">
+              <Mail size={16} />
+              rekayasakeolahragaan@itera.ac.id
+            </div>
+
+          </div>
+
+          {/* SOCIAL */}
+          <div className="flex gap-4 mt-5">
+
+            <a
+              href="https://www.instagram.com/rekayasa_keolahragaan"
+              target="_blank"
+              className="w-10 h-10 flex items-center justify-center rounded-full border border-gray-300 hover:bg-orange-600 hover:text-white transition"
+            >
+              <Instagram size={18} />
+            </a>
+
+            <a
+              href="#"
+              target="_blank"
+              className="w-10 h-10 flex items-center justify-center rounded-full border border-gray-300 hover:bg-orange-600 hover:text-white transition"
+            >
+              <Linkedin size={18} />
+            </a>
+
+            <a
+              href="https://www.youtube.com/@rekayasakeolahragaan"
+              target="_blank"
+              className="w-10 h-10 flex items-center justify-center rounded-full border border-gray-300 hover:bg-orange-600 hover:text-white transition"
+            >
+              <Youtube size={18} />
+            </a>
+
           </div>
         </div>
+
       </div>
 
-      {/* Copyright */}
+      {/* COPYRIGHT */}
       <div className="mt-12 pt-6 border-t border-gray-200 text-center text-xs text-gray-500">
-        © {new Date().getFullYear()} <strong>Sports Engineering ITERA</strong>.
-        Semua Hak Cipta Dilindungi.
+        © {new Date().getFullYear()}{" "}
+        <strong>Rekayasa Keolahragaan ITERA</strong>. Semua Hak Cipta Dilindungi.
       </div>
+
+      {/* BACK TO TOP */}
+      {showTop && (
+        <button
+          onClick={scrollTop}
+          className="fixed bottom-6 right-6 bg-orange-600 hover:bg-orange-700 text-white p-3 rounded-full shadow-lg transition"
+        >
+          <ArrowUp size={20} />
+        </button>
+      )}
 
     </footer>
   );

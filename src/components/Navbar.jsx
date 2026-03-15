@@ -103,17 +103,29 @@ export default function Navbar() {
                   onMouseEnter={() => hasChild && setDropdown(item.label)}
                   onMouseLeave={() => setDropdown(null)}
                 >
-                  <button
-                    className={`flex items-center gap-1 transition ${
-                      active
-                        ? "text-orange-600"
-                        : "text-gray-800 hover:text-orange-600"
-                    }`}
-                  >
-                    {item.label}
-                    {hasChild && <ChevronDown size={16} />}
-                  </button>
-
+                  {item.href ? (
+  <Link
+    href={item.href}
+    className={`flex items-center gap-1 transition ${
+      active
+        ? "text-orange-600"
+        : "text-gray-800 hover:text-orange-600"
+    }`}
+  >
+    {item.label}
+  </Link>
+) : (
+  <button
+    className={`flex items-center gap-1 transition ${
+      active
+        ? "text-orange-600"
+        : "text-gray-800 hover:text-orange-600"
+    }`}
+  >
+    {item.label}
+    {hasChild && <ChevronDown size={16} />}
+  </button>
+)}
                   {active && (
                     <motion.span
                       layoutId="nav"
