@@ -1,0 +1,99 @@
+/* =========================
+   GOOGLE FONT
+========================= */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
+/* =========================
+   TAILWIND
+========================= */
+@import "tailwindcss";
+
+/* =========================
+   BOOTSTRAP ICONS
+========================= */
+@import "bootstrap-icons/font/bootstrap-icons.css";
+
+/* =========================
+   ROOT VARIABLES
+========================= */
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+/* =========================
+   GLOBAL STYLE
+========================= */
+html {
+  font-family: "Poppins", sans-serif;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: "Poppins", sans-serif;
+}
+
+/* =========================
+   SECTION SPACING
+========================= */
+.section {
+  padding-top: 80px;
+  padding-bottom: 80px;
+}
+
+/* untuk section kecil */
+.section-sm {
+  padding-top: 60px;
+  padding-bottom: 60px;
+}
+
+/* untuk section besar (hero dll) */
+.section-lg {
+  padding-top: 120px;
+  padding-bottom: 120px;
+}
+
+/* =========================
+   TEXT SELECTION
+========================= */
+::selection {
+  background: #f97316;
+  color: #ffffff;
+}
+
+/* =========================
+   SCROLLBAR
+========================= */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af;
+}
+
+/* =========================
+   IMAGE FIX
+========================= */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* =========================
+   LINK STYLE
+========================= */
+a {
+  text-decoration: none;
+}
