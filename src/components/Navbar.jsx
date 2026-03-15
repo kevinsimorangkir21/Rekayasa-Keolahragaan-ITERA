@@ -11,6 +11,7 @@ export default function Navbar() {
 
   const [menuOpen, setMenuOpen] = useState(false);
   const [dropdown, setDropdown] = useState(null);
+  const [mobileDropdown, setMobileDropdown] = useState(null);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -70,9 +71,6 @@ export default function Navbar() {
     return false;
   };
 
-  const openDropdown = (label) => setDropdown(label);
-  const closeDropdown = () => setDropdown(null);
-
   return (
     <header className="fixed top-0 w-full z-50">
       <div
@@ -102,8 +100,8 @@ export default function Navbar() {
                 <div
                   key={item.label}
                   className="relative"
-                  onMouseEnter={() => hasChild && openDropdown(item.label)}
-                  onMouseLeave={closeDropdown}
+                  onMouseEnter={() => hasChild && setDropdown(item.label)}
+                  onMouseLeave={() => setDropdown(null)}
                 >
                   <button
                     className={`flex items-center gap-1 transition ${
@@ -113,13 +111,13 @@ export default function Navbar() {
                     }`}
                   >
                     {item.label}
-                    {hasChild && <ChevronDown className="w-4 h-4 opacity-70" />}
+                    {hasChild && <ChevronDown size={16} />}
                   </button>
 
                   {active && (
                     <motion.span
                       layoutId="nav"
-                      className="absolute -bottom-2 h-[2px] bg-orange-600 rounded-full w-full"
+                      className="absolute -bottom-2 h-[2px] bg-orange-600 w-full"
                     />
                   )}
 
@@ -129,17 +127,13 @@ export default function Navbar() {
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0 }}
-                        className={`absolute top-full mt-3 px-4 py-4 bg-white border border-gray-200 rounded-xl shadow-xl ${
-                          item.mega
-                            ? "grid grid-cols-2 gap-2 min-w-[330px]"
-                            : "flex flex-col min-w-[220px]"
-                        }`}
+                        className="absolute top-full mt-3 px-4 py-4 bg-white border border-gray-200 rounded-xl shadow-xl flex flex-col min-w-[220px]"
                       >
-                        {item.children?.map((child) => (
+                        {item.children.map((child) => (
                           <Link
                             key={child.href}
                             href={child.href}
-                            className="text-gray-800 hover:text-orange-600 hover:bg-orange-50 text-sm px-3 py-2 rounded-md transition"
+                            className="px-3 py-2 rounded-md text-sm hover:bg-orange-50 hover:text-orange-600"
                           >
                             {child.label}
                           </Link>
@@ -155,9 +149,9 @@ export default function Navbar() {
           {/* MOBILE BUTTON */}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
-            className="md:hidden p-2 bg-gray-200 rounded"
+            className="md:hidden p-2 rounded bg-gray-200"
           >
-            {menuOpen ? <X /> : <Menu />}
+            {menuOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
         </div>
 
@@ -165,22 +159,77 @@ export default function Navbar() {
         <AnimatePresence>
           {menuOpen && (
             <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
               className="md:hidden bg-white border-t"
             >
-              <div className="flex flex-col px-6 py-4 gap-4">
-                {navLinks.map((item) => (
-                  <Link
-                    key={item.label}
-                    href={item.href || "#"}
-                    className="text-gray-800 hover:text-orange-600"
-                    onClick={() => setMenuOpen(false)}
-                  >
-                    {item.label}
-                  </Link>
-                ))}
+              <div className="flex flex-col px-6 py-4">
+
+                {navLinks.map((item) => {
+                  const hasChild = !!item.children;
+
+                  return (
+                    <div key={item.label} className="border-b last:border-none">
+
+                      {/* Parent */}
+                      <button
+                        onClick={() =>
+                          hasChild
+                            ? setMobileDropdown(
+                                mobileDropdown === item.label
+                                  ? null
+                                  : item.label
+                              )
+                            : setMenuOpen(false)
+                        }
+                        className="w-full flex justify-between items-center py-3 text-left font-medium text-gray-800"
+                      >
+                        {item.href ? (
+                          <Link href={item.href}>{item.label}</Link>
+                        ) : (
+                          item.label
+                        )}
+
+                        {hasChild && (
+                          <ChevronDown
+                            className={`transition ${
+                              mobileDropdown === item.label
+                                ? "rotate-180"
+                                : ""
+                            }`}
+                            size={16}
+                          />
+                        )}
+                      </button>
+
+                      {/* Dropdown */}
+                      <AnimatePresence>
+                        {hasChild && mobileDropdown === item.label && (
+                          <motion.div
+                            initial={{ height: 0 }}
+                            animate={{ height: "auto" }}
+                            exit={{ height: 0 }}
+                            className="flex flex-col pl-4 pb-3"
+                          >
+                            {item.children.map((child) => (
+                              <Link
+                                key={child.href}
+                                href={child.href}
+                                onClick={() => setMenuOpen(false)}
+                                className="py-2 text-sm text-gray-600 hover:text-orange-600"
+                              >
+                                {child.label}
+                              </Link>
+                            ))}
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+
+                    </div>
+                  );
+                })}
+
               </div>
             </motion.div>
           )}
