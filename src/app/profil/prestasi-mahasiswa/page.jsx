@@ -1,107 +1,130 @@
 "use client";
-import { motion } from "framer-motion";
+
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 export default function PrestasiMahasiswaPage() {
-  const achievements = [
+  const data = [
     {
-      title: "Juara 1 Kejuaraan Atletik Nasional",
-      desc: "Mewakili kampus dalam kategori sprint 100m tingkat nasional.",
-      year: "2024",
-      bidang: "Olahraga",
-      img: "https://images.unsplash.com/photo-1502877338535-766e1452684a",
+      nama: "Lusy Rona Rumata Sihombing",
+      nim: "124510007",
+      prodi: "Rekayasa Keolahragaan",
+      prestasi: "Juara 3 Kejuaraan Karate Nasional",
+      foto: "/prestasi/lusy.jpg",
     },
     {
-      title: "Finalis Kompetisi Smart Sport Technology",
-      desc: "Inovasi wearable sensor monitoring performa atlet.",
-      year: "2023",
-      bidang: "Inovasi Teknologi",
-      img: "https://images.unsplash.com/photo-1599058918144-7573e96b37f1",
+      nama: "Damianus Dei Waradana",
+      nim: "124510021",
+      prodi: "Rekayasa Keolahragaan",
+      prestasi:
+        "Juara 1 Kejuaraan Terbuka Wushu Pelajar Tingkat Nasional 'QIANGSHU C Mahasiswa Male' – WUGAMES Universitas Indonesia 2024",
+      foto: "/prestasi/damianus.jpg",
     },
     {
-      title: "Medali Perak POMDA Panjat Tebing",
-      desc: "Berhasil meraih peringkat 2 kategori speed.",
-      year: "2023",
-      bidang: "Olahraga",
-      img: "https://images.unsplash.com/photo-1551958219-acbc608c6377",
+      nama: "Damianus Dei Waradana",
+      nim: "124510021",
+      prodi: "Rekayasa Keolahragaan",
+      prestasi:
+        "Juara 1 Kejuaraan Terbuka Wushu Pelajar Tingkat Nasional 'CHANGQUAN B Mahasiswa Male' – WUGAMES Universitas Indonesia 2024",
+      foto: "/prestasi/damianus.jpg",
     },
   ];
 
-  const slugify = (text) =>
-    text
-      .toLowerCase()
-      .replace(/[^\w\s-]/g, "")
-      .replace(/\s+/g, "-")
-      .trim();
-
   return (
-    <main className="pt-24 bg-gray-50 dark:bg-[#0b0f15] text-gray-900 dark:text-gray-100 min-h-screen transition-colors">
-      <div className="max-w-7xl mx-auto px-6 py-16">
+    <main className="bg-gray-50 min-h-screen">
 
-        {/* Heading */}
-        <div className="text-center mb-14">
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-3xl md:text-5xl font-extrabold text-orange-600 dark:text-orange-400"
-          >
+      {/* HERO */}
+      <section className="relative h-[260px] flex items-center justify-center text-white">
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{
+            backgroundImage:
+              "url(https://images.unsplash.com/photo-1546519638-68e109498ffc)",
+          }}
+        />
+
+        <div className="absolute inset-0 bg-black/60" />
+
+        <div className="relative text-center px-6">
+          <h1 className="text-3xl md:text-4xl font-extrabold">
             Prestasi Mahasiswa
-          </motion.h1>
-          <p className="mt-3 text-gray-600 dark:text-gray-400 max-w-xl mx-auto">
-            Dokumentasi prestasi mahasiswa Rekayasa Keolahragaan dalam bidang
-            olahraga, inovasi teknologi, dan kompetisi akademik.
+          </h1>
+
+          <div className="text-sm mt-3 opacity-90">
+            <Link href="/" className="hover:underline">
+              Home
+            </Link>{" "}
+            /{" "}
+            <Link href="/profil" className="hover:underline">
+              Profil
+            </Link>{" "}
+            / <span>Prestasi Mahasiswa</span>
+          </div>
+        </div>
+      </section>
+
+      {/* CONTENT */}
+      <section className="max-w-7xl mx-auto px-6 py-16">
+
+        <div className="text-center mb-12">
+          <h2 className="text-2xl md:text-3xl font-bold text-orange-600">
+            Daftar Prestasi Mahasiswa
+          </h2>
+
+          <p className="text-gray-600 mt-4">
+            Prestasi mahasiswa Program Studi Rekayasa Keolahragaan ITERA dalam
+            berbagai kompetisi nasional maupun internasional.
           </p>
         </div>
 
-        {/* Achievement Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
-          {achievements.map((item, i) => (
-            <Link
-              key={i}
-              href={`/profil/prestasi-mahasiswa/${slugify(item.title)}`}
-              className="group"
-            >
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: i * 0.1 }}
-                viewport={{ once: true }}
-                className="
-                  bg-white dark:bg-[#101826] rounded-2xl shadow-md overflow-hidden
-                  hover:shadow-xl hover:-translate-y-2 transition-all duration-300
-                  cursor-pointer
-                "
-              >
-                <div
-                  className="h-48 bg-cover bg-center group-hover:scale-105 transition-transform duration-500"
-                  style={{ backgroundImage: `url(${item.img})` }}
-                />
+        {/* TABLE */}
+        <div className="overflow-x-auto bg-white shadow-md rounded-xl">
+          <table className="w-full text-sm border-collapse">
+            <thead className="bg-black text-white">
+              <tr>
+                <th className="p-4 text-left">Nama Mahasiswa</th>
+                <th className="p-4 text-left">NIM</th>
+                <th className="p-4 text-left">Prodi</th>
+                <th className="p-4 text-left">Prestasi</th>
+                <th className="p-4 text-left">Dokumentasi</th>
+              </tr>
+            </thead>
 
-                <div className="p-6 space-y-3">
-                  <span className="inline-block px-3 py-1 text-xs font-semibold
-                    bg-orange-100 text-orange-700 dark:bg-orange-500/20 dark:text-orange-400 rounded-full">
-                    {item.bidang}
-                  </span>
+            <tbody>
+              {data.map((item, index) => (
+                <motion.tr
+                  key={index}
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  transition={{ duration: 0.3 }}
+                  className="border-t hover:bg-gray-50"
+                >
+                  <td className="p-4 font-medium">
+                    {index + 1}. {item.nama}
+                  </td>
 
-                  <h3 className="font-bold text-lg text-gray-900 dark:text-white">
-                    {item.title}
-                  </h3>
+                  <td className="p-4">{item.nim}</td>
 
-                  <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
-                    {item.desc}
-                  </p>
+                  <td className="p-4">{item.prodi}</td>
 
-                  <p className="text-sm font-medium text-orange-600 dark:text-orange-400">
-                    {item.year}
-                  </p>
-                </div>
-              </motion.div>
-            </Link>
-          ))}
+                  <td className="p-4 max-w-md">
+                    {item.prestasi}
+                  </td>
+
+                  <td className="p-4">
+                    <img
+                      src={item.foto}
+                      className="w-44 rounded-lg shadow"
+                      alt="prestasi"
+                    />
+                  </td>
+                </motion.tr>
+              ))}
+            </tbody>
+          </table>
         </div>
 
-      </div>
+      </section>
     </main>
   );
 }
