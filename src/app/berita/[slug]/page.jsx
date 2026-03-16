@@ -9,34 +9,47 @@ export default function BeritaDetail({ params }) {
 
   const news = [
     {
-      slug: "kompetisi-robotika-nasional",
-      title: "Mahasiswa Sports Engineering Ikuti Kompetisi Robotika Nasional",
-      date: "10 Nov 2024",
-      tag: "Prestasi",
-      img: "https://images.unsplash.com/photo-1581093588401-22f6363f6a69",
+      slug: "webinar-rekayasa-keolahragaan-itera-hadirkan-ketua-harian-koni-lampung",
+      title: "Webinar Rekayasa Keolahragaan ITERA Hadirkan Ketua Harian KONI Lampung",
+      date: "06 Mei 2025",
+      tag: "Webinar",
+      img: "/berita/webinar.png",
       content: `
-      Mahasiswa Program Studi Rekayasa Keolahragaan ITERA berhasil meraih
-      prestasi dalam kompetisi robotika tingkat nasional.
+      Mediaolahraga.id, 28 November 2024 – Ketua Harian KONI Lampung, BRIGJEN TNI (Purn.) Amalsyah Tarmizi, S.I.P berkesempatan menjadi pembicara utama dalam acara Stadium General bertajuk “Transformasi Performa Olahraga Melalui Teknologi”. Acara ini diselenggarakan oleh Fakultas Teknik Industri (FTI) Program Studi Rekayasa Keolahragaan, Institut Teknologi Sumatera (ITERA).
 
-      Kompetisi ini diikuti oleh berbagai universitas di Indonesia dan
-      menampilkan inovasi teknologi terbaru dalam bidang robotika dan sport technology.
+Dalam materinya yang berjudul Peranan Perguruan Tinggi dalam Pengembangan Sport Teknologi: Inovasi, Kolaborasi, dan Edukasi, Ketua Harian KONI Lampung memaparkan berbagai inovasi dan perkembangan teknologi yang dapat mengubah paradigma pengelolaan dan pengembangan olahraga, baik di tingkat lokal maupun nasional.
 
-      Prestasi ini menunjukkan bahwa mahasiswa Rekayasa Keolahragaan ITERA
-      mampu bersaing secara nasional dalam bidang teknologi dan rekayasa olahraga.
+Beliau menyoroti peran teknologi dalam meningkatkan performa atlet, mulai dari analisis data performa menggunakan perangkat lunak canggih, penggunaan alat pemantau kebugaran, hingga aplikasi kecerdasan buatan (AI) dalam strategi pelatihan. Selain itu, Ketua Harian KONI juga menggarisbawahi pentingnya kolaborasi antara dunia akademik, organisasi olahraga, dan sektor industri untuk menciptakan ekosistem olahraga berbasis teknologi yang berkelanjutan.
+
+Acara ini dihadiri oleh mahasiswa, dosen, dan praktisi olahraga, yang terlihat antusias mengikuti diskusi interaktif terkait materi yang disampaikan. Dalam sesi tanya jawab, peserta mengajukan berbagai pertanyaan seputar implementasi teknologi di dunia olahraga dan potensi pengembangannya di Lampung.
+
+Selain Ketua Harian Koni Lampung ada pula pemateri lain nya yaitu :
+1. Prof. Dr. Agus Kristiyanto, M.Pd (Guru Besar Universitas Negeri Solo)
+2. Tika Yesi Kristiani (Pelatih dan Programer IT dari ENIGMA)
+
+Melalui kegiatan ini, diharapkan dapat tercipta kesadaran akan pentingnya transformasi teknologi dalam olahraga untuk mencetak atlet berprestasi dan meningkatkan daya saing olahraga Indonesia di kancah internasional.
       `,
     },
     {
-      slug: "wearable-sensor-analisis-gerak-atlet",
-      title: "Penelitian Wearable Sensor untuk Analisis Gerak Atlet",
-      date: "03 Nov 2024",
-      tag: "Penelitian",
-      img: "https://images.unsplash.com/photo-1599058918144-7573e96b37f1",
+      slug: "dibuka-program-studi-rekayasa-keolahragaan-itera-siap-cetak-atlet-berbasis-teknologi",
+      title: "Dibuka Program Studi Rekayasa Keolahragaan ITERA, Siap Cetak Atlet Berbasis Teknologi",
+      date: "16 Mei 2023",
+      tag: "Pengumuman",
+      img: "/berita/dibuka.png",
       content: `
-      Penelitian terbaru dari mahasiswa Rekayasa Keolahragaan ITERA
-      berfokus pada penggunaan wearable sensor untuk analisis gerak atlet.
+      Dengan mengucapkan rasa syukur ‘Alhamdulillah’ kepada tuhan yang Maha Esa, Per tanggal 16 Mei 2023, menyatakan bahwa ;
 
-      Teknologi ini memungkinkan monitoring performa atlet secara real-time
-      sehingga pelatih dapat mengambil keputusan berbasis data.
+Program Studi Rekayasa Keolahragaan
+Jurusan Teknologi Produksi dan Industri
+Institut Teknologi Sumatera
+
+telah resmi dibuka dan menerima mahasiswa baru tahun ajaran 2023/2024
+
+Terimakasih kepada seluruh civitas akademika ITERA yang selama ini telah ikut berkontribusi dalam pembentukan prodi Rekayasa Keolahragaan 🙏🙏
+
+Semoga kita bisa memberikan dampak positif bagi para stakeholder khusus nya dibidang olahraga untuk membantu mewujudkan cita-cita Bangsa Indonesia meraih peringkat 3 besar di Olimpiade 2044
+
+Salam Olahraga !!!
       `,
     },
   ];

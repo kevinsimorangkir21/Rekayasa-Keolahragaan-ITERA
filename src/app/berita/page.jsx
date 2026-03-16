@@ -9,40 +9,24 @@ export default function BeritaPage() {
 
   const news = [
     {
-      slug: "kompetisi-robotika-nasional",
-      title: "Mahasiswa Sports Engineering Ikuti Kompetisi Robotika Nasional",
-      date: "10 Nov 2024",
-      tag: "Prestasi",
-      featured: true,
-      img: "https://images.unsplash.com/photo-1581093588401-22f6363f6a69",
+      slug: "webinar-rekayasa-keolahragaan-itera-hadirkan-ketua-harian-koni-lampung",
+      title: "Webinar Rekayasa Keolahragaan ITERA Hadirkan Ketua Harian KONI Lampung",
+      date: "06 Mei 2025",
+      tag: "Webinar",
+      img: "/berita/webinar.png",
+      content: `
+      Mediaolahraga.id, 28 November 2024 – Ketua Harian KONI Lampung, BRIGJEN TNI (Purn.) Amalsyah Tarmizi, S.I.P berkesempatan menjadi pembicara utama dalam acara Stadium General bertajuk “Transformasi Performa Olahraga Melalui Teknologi”. Acara ini diselenggarakan oleh Fakultas Teknik Industri (FTI) Program Studi Rekayasa Keolahragaan, Institut Teknologi Sumatera (ITERA).
+      `
     },
     {
-      slug: "wearable-sensor-analisis-gerak-atlet",
-      title: "Penelitian Wearable Sensor untuk Analisis Gerak Atlet",
-      date: "03 Nov 2024",
-      tag: "Penelitian",
-      img: "https://images.unsplash.com/photo-1599058918144-7573e96b37f1",
-    },
-    {
-      slug: "kolaborasi-industri-olahraga-nasional",
-      title: "Kolaborasi Sports Engineering dengan Industri Olahraga Nasional",
-      date: "28 Okt 2024",
-      tag: "Kerjasama",
-      img: "https://images.unsplash.com/photo-1552664730-d307ca884978",
-    },
-    {
-      slug: "smart-sport-tech-itera",
-      title: "Mahasiswa ITERA Kembangkan Smart Sport Technology",
-      date: "15 Okt 2024",
-      tag: "Inovasi",
-      img: "https://images.unsplash.com/photo-1517649763962-0c623066013b",
-    },
-    {
-      slug: "workshop-wearable-sensor",
-      title: "Workshop Wearable Sensor untuk Monitoring Atlet",
-      date: "09 Okt 2024",
-      tag: "Workshop",
-      img: "https://images.unsplash.com/photo-1599058918144-7573e96b37f1",
+      slug: "dibuka-program-studi-rekayasa-keolahragaan-itera-siap-cetak-atlet-berbasis-teknologi",
+      title: "Dibuka Program Studi Rekayasa Keolahragaan ITERA, Siap Cetak Atlet Berbasis Teknologi",
+      date: "16 Mei 2023",
+      tag: "Pengumuman",
+      img: "/berita/dibuka.png",
+      content: `
+      Dengan mengucapkan rasa syukur ‘Alhamdulillah’ kepada tuhan yang Maha Esa, Per tanggal 16 Mei 2023, menyatakan bahwa ;
+      `
     },
   ];
 
