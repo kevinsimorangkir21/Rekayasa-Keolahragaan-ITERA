@@ -30,7 +30,7 @@ export default function BeritaPage() {
     },
   ];
 
-  const tags = ["Semua", "Prestasi", "Penelitian", "Kerjasama", "Workshop", "Inovasi"];
+  const tags = ["Semua", "Webinar", "Pengumuman", "Prestasi", "Penelitian", "Kerjasama"];
 
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("Semua");
