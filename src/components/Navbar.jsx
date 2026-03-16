@@ -37,6 +37,7 @@ export default function Navbar() {
       children: [
         { href: "/akademik/kurikulum", label: "Kurikulum" },
         { href: "/akademik/jadwal", label: "Jadwal Kuliah" },
+        { href: "/akademik/dokumen-akademik", label: "Dokumen Akademik" },
         { href: "/akademik/kebutuhan-mahasiswa", label: "Kebutuhan Mahasiswa" },
         { href: "/akademik/kalender", label: "Kalender Akademik" },
         { href: "/akademik/kerja-praktik", label: "Kerja Praktik" },
@@ -62,6 +63,7 @@ export default function Navbar() {
       ],
     },
     { label: "Berita", href: "/berita" },
+    { label: "Event", href: "/event" },
   ];
 
   const isParentActive = (item) => {

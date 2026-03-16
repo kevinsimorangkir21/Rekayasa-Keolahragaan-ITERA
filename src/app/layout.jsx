@@ -4,6 +4,9 @@ import ClientLayoutWrapper from "@/components/ClientLayoutWrapper";
 export const metadata = {
   title: "Rekayasa Keolahragaan ITERA",
   description: "Website resmi Program Studi Rekayasa Keolahragaan ITERA",
+  icons: {
+    icon: "/Favicon.ico",
+  },
 };
 
 export default function RootLayout({ children }) {
