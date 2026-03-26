@@ -1,5 +1,6 @@
 import "./globals.css";
 import ClientLayoutWrapper from "@/components/ClientLayoutWrapper";
+import { ToastProvider } from "@/context/ToastContext"; // ⬅️ TAMBAH INI
 
 export const metadata = {
   title: "Rekayasa Keolahragaan ITERA",
@@ -13,9 +14,15 @@ export default function RootLayout({ children }) {
   return (
     <html lang="id">
       <body className="bg-white text-gray-900 antialiased">
-        <ClientLayoutWrapper>
-          {children}
-        </ClientLayoutWrapper>
+
+        <ToastProvider> {/* ⬅️ WRAP DI SINI */}
+
+          <ClientLayoutWrapper>
+            {children}
+          </ClientLayoutWrapper>
+
+        </ToastProvider>
+
       </body>
     </html>
   );

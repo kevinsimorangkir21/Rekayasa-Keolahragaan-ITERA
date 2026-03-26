@@ -3,31 +3,26 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 
-const slides = [
-  {
-    image:
-      "https://images.unsplash.com/photo-1546519638-68e109498ffc?q=80&w=2000&auto=format&fit=crop",
-  },
-  {
-    image:
-      "https://images.unsplash.com/photo-1521412644187-c49fa049e84d?q=80&w=2000&auto=format&fit=crop",
-  },
-  {
-    image:
-      "https://images.unsplash.com/photo-1517649763962-0c623066013b?q=80&w=2000&auto=format&fit=crop",
-  },
-];
-
-export default function Hero() {
+export default function Hero({ slides = [] }) {
   const [current, setCurrent] = useState(0);
 
   useEffect(() => {
+    if (!slides.length) return;
+
     const timer = setInterval(() => {
       setCurrent((prev) => (prev + 1) % slides.length);
     }, 5000);
 
     return () => clearInterval(timer);
-  }, []);
+  }, [slides]);
+
+  if (!slides.length) {
+    return (
+      <div className="h-[70vh] flex items-center justify-center text-gray-500">
+        Tidak ada gambar hero
+      </div>
+    );
+  }
 
   return (
     <section className="relative overflow-hidden h-[75vh] md:h-[90vh]">
@@ -42,7 +37,7 @@ export default function Hero() {
           transition={{ duration: 1 }}
           className="absolute inset-0 bg-cover bg-center"
           style={{
-            backgroundImage: `url(${slides[current].image})`,
+            backgroundImage: `url(${slides[current]?.image})`,
           }}
         />
       </AnimatePresence>

@@ -1,192 +1,205 @@
 "use client";
-import { useState } from "react";
+
 import {
   Users,
-  Briefcase,
-  Building2,
-  FileText,
-  ClipboardList,
-  MessageSquare,
-  Star,
-  Bell,
+  Newspaper,
+  CalendarDays,
+  UserPlus,
+  Activity,
+  CheckCircle2,
+  Clock,
+  AlertCircle,
+  Download,
+  TrendingUp
 } from "lucide-react";
 
 export default function AdminDashboard() {
-  const [laporan, setLaporan] = useState([
-    {
-      id: 1,
-      nama: "Kevin Simorangkir",
-      perusahaan: "PT Telkom Indonesia",
-      file: "Laporan-Mingguan-Kevin.pdf",
-      tanggal: "2025-10-18",
-    },
-    {
-      id: 2,
-      nama: "Sinta Dewi",
-      perusahaan: "PT Pertamina",
-      file: "Laporan-Mingguan-Sinta.pdf",
-      tanggal: "2025-10-19",
-    },
-  ]);
-
-  const [feedbacks, setFeedbacks] = useState([
-    {
-      id: 1,
-      nama: "Kevin Simorangkir",
-      perusahaan: "PT Telkom Indonesia",
-      rating: 5,
-      kategori: "Feedback Magang",
-    },
-    {
-      id: 2,
-      nama: "Mentor Budi",
-      perusahaan: "PT Astra International",
-      rating: 4,
-      kategori: "Feedback Mentor",
-    },
-  ]);
-
-  const [notifikasi] = useState([
-    { id: 1, pesan: "Peserta baru mendaftar program magang.", waktu: "10 menit lalu" },
-    { id: 2, pesan: "2 laporan mingguan baru diunggah hari ini.", waktu: "1 jam lalu" },
-    { id: 3, pesan: "Feedback baru diterima dari peserta.", waktu: "3 jam lalu" },
-  ]);
 
   const stats = [
-    { label: "Total Peserta", value: "1.254", icon: Users, color: "blue" },
-    { label: "Perusahaan Terdaftar", value: "48", icon: Building2, color: "indigo" },
-    { label: "Lowongan Aktif", value: "86", icon: Briefcase, color: "green" },
-    { label: "Lamaran Masuk", value: "329", icon: FileText, color: "yellow" },
+    {
+      title: "Total Dosen",
+      value: 8,
+      icon: Users,
+      color: "text-blue-600",
+      bg: "bg-blue-50"
+    },
+    {
+      title: "Total Berita",
+      value: 12,
+      icon: Newspaper,
+      color: "text-green-600",
+      bg: "bg-green-50"
+    },
+    {
+      title: "Total Event",
+      value: 5,
+      icon: CalendarDays,
+      color: "text-orange-600",
+      bg: "bg-orange-50"
+    },
+    {
+      title: "Admin",
+      value: 2,
+      icon: UserPlus,
+      color: "text-purple-600",
+      bg: "bg-purple-50"
+    }
+  ];
+
+  const activities = [
+    { user: "Budi", action: "menambah dosen", time: "2 menit lalu" },
+    { user: "Sari", action: "publish berita", time: "15 menit lalu" },
+    { user: "Admin", action: "update event", time: "1 jam lalu" },
   ];
 
   return (
     <div className="space-y-10">
-      {/* 🧭 Header */}
-      <div>
-        <h2 className="text-2xl font-semibold mb-2">Selamat Datang, Admin 👋</h2>
-        <p className="text-gray-600 dark:text-gray-400">
-          Kelola data peserta, laporan, dan feedback magang melalui dashboard ini.
-        </p>
+
+      {/* HEADER */}
+      <div className="flex justify-between items-center">
+        <div>
+          <h1 className="text-3xl font-semibold text-gray-900">
+            Dashboard
+          </h1>
+          <p className="text-gray-500 text-sm">
+            Overview sistem admin
+          </p>
+        </div>
+
+        <button className="flex items-center gap-2 px-4 py-2 rounded-full border border-gray-300 hover:bg-gray-100 text-sm">
+          <Download size={16} />
+          Export Data
+        </button>
       </div>
 
-      {/* 📊 Statistik */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {stats.map((item, i) => (
-          <div
-            key={i}
-            className="p-6 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-[#141a23] shadow-sm hover:shadow-md transition"
-          >
-            <div className="flex items-center gap-4">
-              <div
-                className={`p-3 rounded-full ${
-                  item.color === "blue"
-                    ? "bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400"
-                    : item.color === "green"
-                    ? "bg-green-100 text-green-600 dark:bg-green-900/30 dark:text-green-400"
-                    : item.color === "indigo"
-                    ? "bg-indigo-100 text-indigo-600 dark:bg-indigo-900/30 dark:text-indigo-400"
-                    : "bg-yellow-100 text-yellow-600 dark:bg-yellow-900/30 dark:text-yellow-400"
-                }`}
-              >
-                <item.icon className="w-6 h-6" />
+      {/* STATS */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
+        {stats.map((item, i) => {
+          const Icon = item.icon;
+
+          return (
+            <div
+              key={i}
+              className="border border-gray-200 rounded-2xl p-5 bg-white flex flex-col gap-3"
+            >
+
+              <div className="flex justify-between items-center">
+                <div className={`p-2 rounded-lg ${item.bg}`}>
+                  <Icon size={18} className={item.color} />
+                </div>
+
+                <span className="flex items-center gap-1 text-xs text-green-600">
+                  <TrendingUp size={14} /> +12%
+                </span>
               </div>
-              <div>
-                <p className="text-sm text-gray-500 dark:text-gray-400">{item.label}</p>
-                <h3 className="text-2xl font-bold text-gray-800 dark:text-gray-100">
-                  {item.value}
-                </h3>
-              </div>
+
+              <h2 className="text-2xl font-semibold text-gray-900">
+                {item.value}
+              </h2>
+
+              <p className="text-sm text-gray-500">
+                {item.title}
+              </p>
+
+            </div>
+          );
+        })}
+      </div>
+
+      {/* MAIN */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+        {/* CHART */}
+        <div className="lg:col-span-2 border border-gray-200 rounded-2xl p-6 bg-white">
+
+          <div className="flex justify-between mb-6">
+            <h3 className="font-semibold text-gray-900">
+              Analytics
+            </h3>
+
+            <div className="flex gap-2 text-xs">
+              <button className="px-3 py-1 rounded-full bg-gray-900 text-white">
+                7 Hari
+              </button>
+              <button className="px-3 py-1 rounded-full bg-gray-100">
+                30 Hari
+              </button>
             </div>
           </div>
-        ))}
+
+          {/* FAKE CHART */}
+          <div className="h-40 flex items-end gap-2">
+            {[40, 60, 30, 80, 55, 70, 90].map((h, i) => (
+              <div
+                key={i}
+                className="flex-1 bg-gray-200 rounded-md relative overflow-hidden"
+              >
+                <div
+                  className="absolute bottom-0 left-0 w-full bg-gray-900 rounded-md"
+                  style={{ height: `${h}%` }}
+                />
+              </div>
+            ))}
+          </div>
+
+        </div>
+
+        {/* ACTIVITY */}
+        <div className="border border-gray-200 rounded-2xl p-6 bg-white">
+
+          <h3 className="font-semibold mb-5 flex items-center gap-2 text-gray-900">
+            <Activity size={18} />
+            Aktivitas
+          </h3>
+
+          <div className="space-y-4">
+            {activities.map((a, i) => (
+              <div key={i} className="flex gap-3 items-start">
+
+                <div className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-xs font-semibold">
+                  {a.user[0]}
+                </div>
+
+                <div className="flex-1">
+                  <p className="text-sm text-gray-800">
+                    <span className="font-medium">{a.user}</span> {a.action}
+                  </p>
+                  <p className="text-xs text-gray-400">
+                    {a.time}
+                  </p>
+                </div>
+
+              </div>
+            ))}
+          </div>
+
+        </div>
+
       </div>
 
-      {/* 📋 Laporan Mingguan */}
-      <section>
-        <h3 className="text-lg font-semibold mb-3 flex items-center gap-2">
-          <ClipboardList className="w-5 h-5 text-blue-500" /> Laporan Mingguan
-        </h3>
-        <div className="overflow-x-auto rounded-xl border border-gray-200 dark:border-gray-800">
-          <table className="w-full text-sm">
-            <thead className="bg-gray-100 dark:bg-[#1a1f2b] text-gray-700 dark:text-gray-300">
-              <tr>
-                <th className="py-3 px-4 text-left">Nama</th>
-                <th className="py-3 px-4 text-left">Perusahaan</th>
-                <th className="py-3 px-4 text-left">File</th>
-                <th className="py-3 px-4 text-left">Tanggal</th>
-              </tr>
-            </thead>
-            <tbody>
-              {laporan.map((item) => (
-                <tr
-                  key={item.id}
-                  className="border-t border-gray-100 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-white/5 transition"
-                >
-                  <td className="py-3 px-4">{item.nama}</td>
-                  <td className="py-3 px-4">{item.perusahaan}</td>
-                  <td className="py-3 px-4 text-blue-600 dark:text-blue-400 hover:underline cursor-pointer">
-                    {item.file}
-                  </td>
-                  <td className="py-3 px-4 text-gray-500">{item.tanggal}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </section>
+      {/* STATUS */}
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
 
-      {/* 💬 Feedback Magang & Mentor */}
-      <section>
-        <h3 className="text-lg font-semibold mb-3 flex items-center gap-2">
-          <MessageSquare className="w-5 h-5 text-green-500" /> Feedback Terbaru
-        </h3>
-        <div className="grid md:grid-cols-2 gap-4">
-          {feedbacks.map((fb) => (
-            <div
-              key={fb.id}
-              className="p-5 border border-gray-200 dark:border-gray-800 rounded-xl bg-white dark:bg-[#141a23] shadow-sm"
-            >
-              <div className="flex justify-between items-center mb-1">
-                <h4 className="font-semibold text-blue-600 dark:text-blue-400">
-                  {fb.nama}
-                </h4>
-                <span className="text-xs text-gray-500">{fb.kategori}</span>
-              </div>
-              <p className="text-sm text-gray-500 mb-2">{fb.perusahaan}</p>
-              <div className="flex items-center gap-1">
-                {[...Array(5)].map((_, i) => (
-                  <Star
-                    key={i}
-                    className={`w-4 h-4 ${
-                      i < fb.rating
-                        ? "text-yellow-400 fill-yellow-400"
-                        : "text-gray-400"
-                    }`}
-                  />
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
+        {[
+          { icon: CheckCircle2, value: 45, label: "Published" },
+          { icon: Clock, value: 12, label: "Pending" },
+          { icon: AlertCircle, value: 3, label: "Issues" },
+        ].map((item, i) => {
+          const Icon = item.icon;
 
-      {/* 🔔 Notifikasi */}
-      <section>
-        <h3 className="text-lg font-semibold mb-3 flex items-center gap-2">
-          <Bell className="w-5 h-5 text-yellow-500" /> Aktivitas Terbaru
-        </h3>
-        <div className="bg-white dark:bg-[#141a23] border border-gray-200 dark:border-gray-800 rounded-xl p-5 space-y-3">
-          {notifikasi.map((n) => (
+          return (
             <div
-              key={n.id}
-              className="flex justify-between items-center border-b last:border-none border-gray-100 dark:border-gray-800 pb-2"
+              key={i}
+              className="border border-gray-200 rounded-2xl p-6 bg-white text-center"
             >
-              <p className="text-sm text-gray-700 dark:text-gray-300">{n.pesan}</p>
-              <span className="text-xs text-gray-500">{n.waktu}</span>
+              <Icon className="mx-auto mb-2 text-gray-700" size={24} />
+              <h3 className="text-xl font-semibold">{item.value}</h3>
+              <p className="text-sm text-gray-500">{item.label}</p>
             </div>
-          ))}
-        </div>
-      </section>
+          );
+        })}
+      </div>
+
     </div>
   );
 }

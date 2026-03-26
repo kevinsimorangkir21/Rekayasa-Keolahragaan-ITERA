@@ -11,14 +11,14 @@ export default function Events() {
   const events = [
     {
       title: "Seminar Nasional Biomekanika Olahraga",
-      date: "2024-12-15T09:00:00",
+      date: "2026-12-15T09:00:00",
       location: "Aula Utama ITERA",
       img: "https://images.unsplash.com/photo-1605296867304-46d5465a13f1",
       desc: "Seminar sport science dengan topik biomekanika atlet dan wearable sensor terbaru.",
     },
     {
       title: "Smart Sport Technology Expo",
-      date: "2025-01-05T08:30:00",
+      date: "2026-03-25T08:30:00",
       location: "GSG ITERA",
       img: "https://images.unsplash.com/photo-1517649763962-0c623066013b",
       desc: "Pameran teknologi olahraga hasil kolaborasi kampus dan industri sport-tech.",
@@ -28,18 +28,42 @@ export default function Events() {
       date: "2025-01-22T09:00:00",
       location: "Lab REKO",
       img: "https://images.unsplash.com/photo-1599058918144-7573e96b37f1",
-      desc: "Pelatihan teknis wearable sensor untuk monitoring performa atlet secara akurat dan real-time.",
+      desc: "Pelatihan teknis wearable sensor untuk monitoring performa atlet.",
     },
   ];
 
+  // STATUS BADGE
+  const getStatus = (date) => {
+    const now = new Date();
+    const eventDate = new Date(date);
+
+    const isToday =
+      now.toDateString() === eventDate.toDateString();
+
+    if (eventDate < now) return "Ended";
+    if (isToday) return "Today";
+    return "Soon";
+  };
+
+  const getBadgeStyle = (status) => {
+    switch (status) {
+      case "Today":
+        return "bg-green-100 text-green-600";
+      case "Soon":
+        return "bg-blue-100 text-blue-600";
+      case "Ended":
+        return "bg-gray-100 text-gray-500";
+    }
+  };
+
+  // COUNTDOWN
   useEffect(() => {
     if (!selectedEvent) return;
 
     const eventDate = new Date(selectedEvent.date).getTime();
 
     const interval = setInterval(() => {
-      const now = Date.now();
-      const diff = eventDate - now;
+      const diff = eventDate - Date.now();
 
       if (diff <= 0) {
         setTimeLeft(null);
@@ -59,132 +83,142 @@ export default function Events() {
   }, [selectedEvent]);
 
   return (
-    <section className="py-28 bg-gray-50">
-      <div className="max-w-6xl mx-auto px-6">
+    <section className="py-28 bg-white">
+      <div className="max-w-7xl mx-auto px-6">
 
-        {/* TITLE */}
-        <div className="text-center mb-14">
-          <h2 className="text-3xl md:text-4xl font-extrabold text-orange-600">
-            Event & Kegiatan
-          </h2>
-
-          <p className="text-gray-600 max-w-2xl mx-auto mt-4">
-            Ikuti berbagai kegiatan akademik dan seminar Rekayasa Keolahragaan.
-          </p>
+        {/* HEADER */}
+        <div className="flex justify-between items-end mb-16">
+          <div>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
+              Event & Kegiatan
+            </h2>
+            <p className="text-gray-500 mt-2">
+              Semua event terbaru bisa kamu lihat di sini
+            </p>
+          </div>
         </div>
 
         {/* GRID */}
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
           {events.map((item, i) => {
-            const eventDate = new Date(item.date);
+            const status = getStatus(item.date);
 
             return (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: i * 0.1 }}
-                viewport={{ once: true }}
-                className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl hover:-translate-y-2 transition cursor-pointer"
-                onClick={() => {
-                  setSelectedEvent(item);
-                  setTimeLeft(null);
-                }}
+                whileHover={{ y: -4 }}
+                className="border border-gray-200 rounded-2xl overflow-hidden cursor-pointer group bg-white"
+                onClick={() => setSelectedEvent(item)}
               >
-                <div
-                  className="h-48 bg-cover bg-center"
-                  style={{ backgroundImage: `url(${item.img})` }}
-                />
 
-                <div className="p-6 flex gap-4">
+                {/* IMAGE */}
+                <div className="relative h-40">
+                  <div
+                    className="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition"
+                    style={{ backgroundImage: `url(${item.img})` }}
+                  />
 
-                  {/* DATE BADGE */}
-                  <div className="bg-orange-600 text-white rounded-xl px-4 py-3 text-center min-w-[70px]">
-                    <div className="text-xl font-bold">
-                      {eventDate.getDate()}
-                    </div>
-                    <div className="text-xs uppercase">
-                      {eventDate.toLocaleString("default", { month: "short" })}
-                    </div>
+                  {/* BADGE */}
+                  <div
+                    className={`absolute top-3 left-3 px-3 py-1 text-xs rounded-full font-medium ${getBadgeStyle(
+                      status
+                    )}`}
+                  >
+                    {status}
+                  </div>
+                </div>
+
+                {/* CONTENT */}
+                <div className="p-4 flex flex-col h-full">
+
+                  <h3 className="font-semibold text-gray-900 text-sm line-clamp-2 group-hover:text-orange-600">
+                    {item.title}
+                  </h3>
+
+                  <div className="flex items-center gap-2 text-xs text-gray-500 mt-2">
+                    <MapPin size={12} />
+                    {item.location}
                   </div>
 
-                  {/* EVENT INFO */}
-                  <div>
-                    <h3 className="font-semibold text-lg text-gray-900">
-                      {item.title}
-                    </h3>
-
-                    <p className="text-sm text-gray-500 mt-2 flex items-center gap-1">
-                      <MapPin size={14} /> {item.location}
-                    </p>
+                  <div className="flex items-center gap-2 text-xs text-gray-400 mt-2">
+                    <CalendarDays size={12} />
+                    {new Date(item.date).toLocaleDateString()}
                   </div>
 
                 </div>
+
               </motion.div>
             );
           })}
         </div>
       </div>
 
-      {/* MODAL */}
+      {/* MODAL DETAIL */}
       <AnimatePresence>
         {selectedEvent && (
           <motion.div
-            className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 px-6"
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 px-6"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setSelectedEvent(null)}
           >
             <motion.div
-              className="bg-white rounded-2xl p-6 max-w-lg w-full shadow-xl relative"
-              initial={{ scale: 0.85 }}
+              className="bg-white rounded-2xl p-6 max-w-lg w-full border border-gray-200 relative"
+              initial={{ scale: 0.9 }}
               animate={{ scale: 1 }}
-              exit={{ scale: 0.85 }}
+              exit={{ scale: 0.9 }}
               onClick={(e) => e.stopPropagation()}
             >
+
               <button
-                className="absolute top-3 right-3 text-gray-500 hover:text-orange-600"
                 onClick={() => setSelectedEvent(null)}
+                className="absolute top-3 right-3 text-gray-400 hover:text-orange-600"
               >
                 <X size={20} />
               </button>
 
-              <h3 className="text-xl font-bold text-orange-600">
+              <h3 className="text-xl font-bold text-gray-900">
                 {selectedEvent.title}
               </h3>
 
-              <div className="flex items-center gap-2 mt-3 text-sm text-gray-600">
+              <div className="text-sm text-gray-500 mt-3 flex items-center gap-2">
                 <CalendarDays size={16} />
                 {new Date(selectedEvent.date).toLocaleString()}
               </div>
 
-              <div className="flex items-center gap-2 text-sm text-gray-600 mt-1">
+              <div className="text-sm text-gray-500 mt-1 flex items-center gap-2">
                 <MapPin size={16} />
                 {selectedEvent.location}
               </div>
 
               {/* COUNTDOWN */}
               {timeLeft ? (
-                <div className="grid grid-cols-4 gap-2 text-center mt-6">
+                <div className="grid grid-cols-4 gap-2 mt-6">
                   {Object.entries(timeLeft).map(([k, v]) => (
-                    <div key={k} className="bg-orange-600 text-white rounded-xl py-2">
-                      <div className="text-lg font-bold">{v}</div>
-                      <div className="text-[10px] uppercase">{k}</div>
+                    <div
+                      key={k}
+                      className="border border-gray-200 rounded-xl py-2 text-center"
+                    >
+                      <div className="font-semibold">{v}</div>
+                      <div className="text-[10px] text-gray-400 uppercase">
+                        {k}
+                      </div>
                     </div>
                   ))}
                 </div>
               ) : (
-                <p className="flex items-center justify-center gap-2 text-orange-500 font-semibold mt-6">
-                  <Clock size={18} /> Event sudah dimulai atau selesai
+                <p className="text-orange-500 mt-6 flex items-center gap-2 justify-center">
+                  <Clock size={18} /> Event sudah selesai / berjalan
                 </p>
               )}
 
-              <p className="mt-5 text-gray-700 leading-relaxed">
+              <p className="mt-5 text-gray-600">
                 {selectedEvent.desc}
               </p>
 
-              <button className="mt-6 w-full bg-orange-600 hover:bg-orange-700 text-white py-3 rounded-xl font-medium transition">
+              <button className="mt-6 w-full border border-gray-300 py-3 rounded-xl hover:bg-gray-100 transition">
                 Daftar Event
               </button>
             </motion.div>

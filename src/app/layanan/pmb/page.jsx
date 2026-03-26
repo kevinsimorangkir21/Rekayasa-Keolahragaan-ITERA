@@ -9,48 +9,42 @@ export default function PMBPage() {
     {
       icon: GraduationCap,
       title: "SNBP",
-      desc: "Seleksi Nasional Berdasarkan Prestasi yang menggunakan nilai rapor dan prestasi akademik sebagai dasar seleksi.",
+      desc: "Seleksi berdasarkan prestasi akademik dan nilai rapor.",
     },
     {
       icon: FileCheck,
       title: "SNBT",
-      desc: "Seleksi Nasional Berdasarkan Tes menggunakan hasil UTBK sebagai syarat utama penerimaan mahasiswa baru.",
+      desc: "Seleksi berdasarkan hasil UTBK sebagai syarat utama.",
     },
     {
       icon: Users,
       title: "Mandiri ITERA",
-      desc: "Seleksi mandiri yang diselenggarakan oleh ITERA untuk memberikan kesempatan tambahan bagi calon mahasiswa.",
+      desc: "Seleksi tambahan yang diselenggarakan oleh ITERA.",
     },
   ];
 
   return (
     <>
       {/* HERO */}
-      <section
-        className="relative h-[280px] flex items-center justify-center text-white"
-        style={{
-          backgroundImage:
-            "url(https://images.unsplash.com/photo-1523050854058-8df90110c9f1)",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      >
+      <section className="relative h-[300px] flex items-center justify-center text-white">
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{
+            backgroundImage:
+              "url(https://images.unsplash.com/photo-1523050854058-8df90110c9f1)",
+          }}
+        />
         <div className="absolute inset-0 bg-black/60" />
 
         <div className="relative text-center px-6">
-          <h1 className="text-4xl md:text-5xl font-extrabold">
+          <h1 className="text-4xl font-semibold">
             Penerimaan Mahasiswa Baru
           </h1>
 
-          {/* Breadcrumb */}
-          <div className="mt-4 text-sm text-gray-200 flex justify-center gap-2">
-            <Link href="/" className="hover:text-orange-400">
-              Beranda
-            </Link>
+          <div className="mt-3 text-sm text-gray-300 flex justify-center gap-2">
+            <Link href="/">Beranda</Link>
             <span>/</span>
-            <Link href="/layanan" className="hover:text-orange-400">
-              Layanan
-            </Link>
+            <Link href="/layanan">Layanan</Link>
             <span>/</span>
             <span className="text-orange-400">PMB</span>
           </div>
@@ -58,63 +52,79 @@ export default function PMBPage() {
       </section>
 
       {/* CONTENT */}
-      <section className="bg-gray-50 py-20">
+      <section className="bg-white py-20">
         <div className="max-w-6xl mx-auto px-6">
 
-          {/* TITLE */}
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-orange-600">
+          {/* INTRO */}
+          <div className="text-center mb-16 max-w-2xl mx-auto">
+            <h2 className="text-3xl font-semibold text-gray-900">
               PMB ITERA
             </h2>
 
-            <p className="mt-4 text-gray-600 max-w-2xl mx-auto">
-              Penerimaan Mahasiswa Baru Institut Teknologi Sumatera (ITERA)
-              memberikan kesempatan bagi calon mahasiswa untuk bergabung dan
-              menempuh pendidikan tinggi melalui berbagai jalur seleksi nasional
+            <p className="mt-4 text-gray-500 leading-relaxed">
+              ITERA menyediakan berbagai jalur seleksi bagi calon mahasiswa
+              untuk melanjutkan pendidikan tinggi melalui sistem nasional
               maupun seleksi mandiri.
             </p>
 
-            {/* Button External */}
+            {/* CTA */}
             <a
               href="https://pmb.itera.ac.id"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 mt-6 px-6 py-3 rounded-xl
-              bg-orange-600 text-white font-medium
-              hover:bg-orange-700 transition"
+              className="
+                inline-flex items-center gap-2
+                mt-6 px-5 py-2.5
+                rounded-full
+                border border-gray-300
+                text-sm text-gray-700
+                hover:bg-gray-100
+                transition
+              "
             >
-              Kunjungi PMB ITERA <ArrowUpRight size={18} />
+              Kunjungi PMB
+              <ArrowUpRight size={16} />
             </a>
           </div>
 
-          {/* JALUR SELEKSI */}
-          <div className="grid md:grid-cols-3 gap-8">
+          {/* GRID */}
+          <div className="grid md:grid-cols-3 gap-6">
+
             {jalur.map((item, i) => {
               const Icon = item.icon;
 
               return (
                 <motion.div
                   key={i}
-                  initial={{ opacity: 0, y: 40 }}
+                  initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: i * 0.1 }}
+                  transition={{ duration: 0.4, delay: i * 0.1 }}
                   viewport={{ once: true }}
-                  className="bg-white p-8 rounded-2xl shadow-md hover:shadow-xl transition"
+                  className="
+                    border border-gray-200
+                    rounded-2xl
+                    p-6
+                    hover:bg-gray-50
+                    transition
+                  "
                 >
-                  <div className="mb-4 text-orange-600">
-                    <Icon size={32} />
+
+                  <div className="mb-4 text-gray-700">
+                    <Icon size={26} />
                   </div>
 
-                  <h3 className="font-bold text-lg text-gray-900">
+                  <h3 className="font-semibold text-gray-900">
                     {item.title}
                   </h3>
 
-                  <p className="text-gray-600 mt-3 text-sm leading-relaxed">
+                  <p className="text-sm text-gray-500 mt-2 leading-relaxed">
                     {item.desc}
                   </p>
+
                 </motion.div>
               );
             })}
+
           </div>
 
         </div>

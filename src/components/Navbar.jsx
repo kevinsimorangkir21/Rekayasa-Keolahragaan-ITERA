@@ -33,7 +33,6 @@ export default function Navbar() {
     },
     {
       label: "Akademik",
-      mega: true,
       children: [
         { href: "/akademik/kurikulum", label: "Kurikulum" },
         { href: "/akademik/jadwal", label: "Jadwal Kuliah" },
@@ -50,7 +49,7 @@ export default function Navbar() {
       children: [
         { href: "/layanan/fakultas", label: "Layanan Fakultas" },
         { href: "/layanan/keuangan", label: "Layanan Keuangan" },
-        { href: "/layanan/pmb", label: "Penerimaan Mahasiswa Baru" },
+        { href: "/layanan/pmb", label: "PMB" },
         { href: "/layanan/lapor-pengaduan", label: "Lapor Pengaduan" },
       ],
     },
@@ -69,25 +68,32 @@ export default function Navbar() {
   const isParentActive = (item) => {
     if (item.href) return pathname === item.href;
     if (item.children)
-      return item.children.some((child) => pathname.startsWith(child.href));
+      return item.children.some((child) =>
+        pathname.startsWith(child.href)
+      );
     return false;
   };
 
   return (
     <header className="fixed top-0 w-full z-50">
+      {/* BACKGROUND */}
       <div
-        className={`border-b border-gray-200 transition-all duration-300 ${
-          scrolled ? "bg-white shadow-md" : "bg-white"
+        className={`transition-all duration-300 ${
+          scrolled
+            ? "bg-white/90 backdrop-blur-md shadow-sm border-b border-gray-100"
+            : "bg-transparent"
         }`}
       >
         <div className="max-w-6xl mx-auto px-6 h-[72px] flex items-center justify-between">
-
+          
           {/* LOGO */}
           <Link href="/" className="flex items-center">
             <motion.img
               src="/RekayasaKeolahragaan.png"
               alt="Logo"
-              className="w-25 h-25"
+              className={`w-20 transition ${
+                scrolled ? "" : "brightness-0"
+              }`}
               whileHover={{ rotate: 6, scale: 1.05 }}
             />
           </Link>
@@ -106,28 +112,34 @@ export default function Navbar() {
                   onMouseLeave={() => setDropdown(null)}
                 >
                   {item.href ? (
-  <Link
-    href={item.href}
-    className={`flex items-center gap-1 transition ${
-      active
-        ? "text-orange-600"
-        : "text-gray-800 hover:text-orange-600"
-    }`}
-  >
-    {item.label}
-  </Link>
-) : (
-  <button
-    className={`flex items-center gap-1 transition ${
-      active
-        ? "text-orange-600"
-        : "text-gray-800 hover:text-orange-600"
-    }`}
-  >
-    {item.label}
-    {hasChild && <ChevronDown size={16} />}
-  </button>
-)}
+                    <Link
+                      href={item.href}
+                      className={`flex items-center gap-1 transition ${
+                        active
+                          ? "text-orange-600"
+                          : scrolled
+                          ? "text-gray-800 hover:text-orange-600"
+                          : "text-gray-900 hover:text-orange-500"
+                      }`}
+                    >
+                      {item.label}
+                    </Link>
+                  ) : (
+                    <button
+                      className={`flex items-center gap-1 transition ${
+                        active
+                          ? "text-orange-600"
+                          : scrolled
+                          ? "text-gray-800 hover:text-orange-600"
+                          : "text-gray-900 hover:text-orange-500"
+                      }`}
+                    >
+                      {item.label}
+                      {hasChild && <ChevronDown size={16} />}
+                    </button>
+                  )}
+
+                  {/* UNDERLINE */}
                   {active && (
                     <motion.span
                       layoutId="nav"
@@ -135,19 +147,20 @@ export default function Navbar() {
                     />
                   )}
 
+                  {/* DROPDOWN */}
                   <AnimatePresence>
                     {hasChild && dropdown === item.label && (
                       <motion.div
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0 }}
-                        className="absolute top-full mt-3 px-4 py-4 bg-white border border-gray-200 rounded-xl shadow-xl flex flex-col min-w-[220px]"
+                        className="absolute top-full mt-3 px-4 py-4 bg-white border border-gray-100 rounded-xl shadow-lg flex flex-col min-w-[220px]"
                       >
                         {item.children.map((child) => (
                           <Link
                             key={child.href}
                             href={child.href}
-                            className="px-3 py-2 rounded-md text-sm hover:bg-orange-50 hover:text-orange-600"
+                            className="px-3 py-2 rounded-md text-sm text-gray-700 hover:bg-orange-50 hover:text-orange-600"
                           >
                             {child.label}
                           </Link>
@@ -163,7 +176,7 @@ export default function Navbar() {
           {/* MOBILE BUTTON */}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
-            className="md:hidden p-2 rounded bg-gray-200"
+            className="md:hidden p-2 rounded-lg bg-gray-100"
           >
             {menuOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
@@ -176,17 +189,14 @@ export default function Navbar() {
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: "auto", opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
-              className="md:hidden bg-white border-t"
+              className="md:hidden bg-white border-t border-gray-100"
             >
               <div className="flex flex-col px-6 py-4">
-
                 {navLinks.map((item) => {
                   const hasChild = !!item.children;
 
                   return (
                     <div key={item.label} className="border-b last:border-none">
-
-                      {/* Parent */}
                       <button
                         onClick={() =>
                           hasChild
@@ -217,7 +227,6 @@ export default function Navbar() {
                         )}
                       </button>
 
-                      {/* Dropdown */}
                       <AnimatePresence>
                         {hasChild && mobileDropdown === item.label && (
                           <motion.div
@@ -239,16 +248,13 @@ export default function Navbar() {
                           </motion.div>
                         )}
                       </AnimatePresence>
-
                     </div>
                   );
                 })}
-
               </div>
             </motion.div>
           )}
         </AnimatePresence>
-
       </div>
     </header>
   );

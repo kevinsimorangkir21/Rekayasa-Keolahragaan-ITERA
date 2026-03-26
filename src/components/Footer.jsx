@@ -1,11 +1,17 @@
 "use client";
 
 import Link from "next/link";
-import { Instagram, Linkedin, Youtube, Mail, MapPin, ArrowUp } from "lucide-react";
+import {
+  Instagram,
+  Linkedin,
+  Youtube,
+  Mail,
+  MapPin,
+  ArrowUp,
+} from "lucide-react";
 import { useState, useEffect } from "react";
 
 export default function Footer() {
-
   const [showTop, setShowTop] = useState(false);
 
   useEffect(() => {
@@ -22,15 +28,15 @@ export default function Footer() {
   };
 
   return (
-    <footer className="relative overflow-hidden bg-gray-50 text-gray-700 pt-20 pb-10 border-t border-gray-200">
+    <footer className="relative bg-white text-gray-700 pt-24 pb-10 border-t border-gray-200">
 
-      {/* Wave */}
-      <div className="absolute top-0 left-0 w-full overflow-hidden leading-[0] rotate-180">
+      {/* WAVE (lebih subtle) */}
+      <div className="absolute top-0 left-0 w-full overflow-hidden leading-[0] rotate-180 opacity-50">
         <svg
-          className="relative block w-full h-20 text-gray-50"
+          className="relative block w-full h-16 text-gray-50"
           xmlns="http://www.w3.org/2000/svg"
-          preserveAspectRatio="none"
           viewBox="0 0 1200 120"
+          preserveAspectRatio="none"
         >
           <path
             d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,
@@ -43,181 +49,159 @@ export default function Footer() {
         </svg>
       </div>
 
-      {/* CONTENT */}
-      <div className="relative max-w-6xl mx-auto px-6 grid md:grid-cols-4 gap-12">
+      <div className="relative max-w-7xl mx-auto px-6">
 
-        {/* BRAND */}
-        <div>
-          <div className="flex items-center gap-3 mb-4">
-            <img src="/RekayasaKeolahragaan.png" alt="REKO" className="w-25 h-25" />
+        {/* GRID */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
+
+          {/* BRAND */}
+          <div>
+            <img
+              src="/RekayasaKeolahragaan.png"
+              alt="REKO"
+              className="w-28 mb-4"
+            />
+
+            <p className="text-sm text-gray-500 leading-relaxed">
+              Program Studi Rekayasa Keolahragaan ITERA berfokus pada
+              pengembangan teknologi olahraga, sport science, serta inovasi
+              rekayasa untuk meningkatkan performa atlet.
+            </p>
           </div>
 
-          <p className="text-sm text-gray-600 leading-relaxed">
-            Program Studi Rekayasa Keolahragaan Institut Teknologi Sumatera
-            berfokus pada pengembangan teknologi olahraga, sport science,
-            serta inovasi rekayasa untuk meningkatkan performa atlet dan industri olahraga.
-          </p>
-        </div>
+          {/* NAVIGASI */}
+          <div>
+            <h4 className="font-semibold text-gray-900 mb-4">
+              Navigasi
+            </h4>
 
-        {/* NAVIGASI */}
-        <div>
-          <h4 className="font-semibold text-orange-600 mb-4">
-            Navigasi
-          </h4>
+            <ul className="space-y-2 text-sm">
+              {[
+                ["Beranda", "/"],
+                ["Sejarah", "/profil/sejarah"],
+                ["Visi & Misi", "/profil/visi-misi"],
+                ["Staff Dosen", "/profil/staff-dosen"],
+                ["Prestasi Mahasiswa", "/profil/prestasi-mahasiswa"],
+                ["Berita", "/berita"],
+              ].map(([label, href], i) => (
+                <li key={i}>
+                  <Link
+                    href={href}
+                    className="text-gray-500 hover:text-orange-600 transition"
+                  >
+                    {label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
 
-          <ul className="space-y-2 text-sm">
+          {/* QUICK LINKS */}
+          <div>
+            <h4 className="font-semibold text-gray-900 mb-4">
+              Akademik
+            </h4>
 
-            <li>
-              <Link href="/" className="hover:text-orange-600">
-                Beranda
-              </Link>
-            </li>
+            <ul className="space-y-2 text-sm">
+              {[
+                ["Kurikulum", "/akademik/kurikulum"],
+                ["Kerja Praktik", "/akademik/kerja-praktik"],
+                ["KKN", "/akademik/kuliah-kerja-nyata"],
+                ["PMB", "/layanan/pmb"],
+                ["Perpustakaan", "/fasilitas/perpustakaan"],
+              ].map(([label, href], i) => (
+                <li key={i}>
+                  <Link
+                    href={href}
+                    className="text-gray-500 hover:text-orange-600 transition"
+                  >
+                    {label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
 
-            <li>
-              <Link href="/profil/sejarah" className="hover:text-orange-600">
-                Sejarah
-              </Link>
-            </li>
+          {/* CONTACT */}
+          <div>
+            <h4 className="font-semibold text-gray-900 mb-4">
+              Kontak
+            </h4>
 
-            <li>
-              <Link href="/profil/visi-misi" className="hover:text-orange-600">
-                Visi & Misi
-              </Link>
-            </li>
+            <div className="space-y-3 text-sm text-gray-500">
 
-            <li>
-              <Link href="/profil/staff-dosen" className="hover:text-orange-600">
-                Staff Dosen
-              </Link>
-            </li>
+              <div className="flex gap-2 items-start">
+                <MapPin size={16} className="mt-1" />
+                <span>
+                  Institut Teknologi Sumatera  
+                  Lampung Selatan, Indonesia
+                </span>
+              </div>
 
-            <li>
-              <Link href="/profil/prestasi-mahasiswa" className="hover:text-orange-600">
-                Prestasi Mahasiswa
-              </Link>
-            </li>
-
-            <li>
-              <Link href="/berita" className="hover:text-orange-600">
-                Berita
-              </Link>
-            </li>
-
-          </ul>
-        </div>
-
-        {/* QUICK LINKS */}
-        <div>
-          <h4 className="font-semibold text-orange-600 mb-4">
-            Quick Links
-          </h4>
-
-          <ul className="space-y-2 text-sm">
-
-            <li>
-              <Link href="/akademik/kurikulum" className="hover:text-orange-600">
-                Kurikulum
-              </Link>
-            </li>
-
-            <li>
-              <Link href="/akademik/kerja-praktik" className="hover:text-orange-600">
-                Kerja Praktik
-              </Link>
-            </li>
-
-            <li>
-              <Link href="/akademik/kuliah-kerja-nyata" className="hover:text-orange-600">
-                Kuliah Kerja Nyata
-              </Link>
-            </li>
-
-            <li>
-              <Link href="/layanan/pmb" className="hover:text-orange-600">
-                Penerimaan Mahasiswa Baru
-              </Link>
-            </li>
-
-            <li>
-              <Link href="/fasilitas/perpustakaan" className="hover:text-orange-600">
-                Perpustakaan
-              </Link>
-            </li>
-
-          </ul>
-        </div>
-
-        {/* CONTACT */}
-        <div>
-          <h4 className="font-semibold text-orange-600 mb-4">
-            Kontak
-          </h4>
-
-          <div className="space-y-3 text-sm text-gray-600">
-
-            <div className="flex gap-2 items-start">
-              <MapPin size={16} className="mt-1" />
-              <span>
-                Institut Teknologi Sumatera  
-                Lampung Selatan, Indonesia
-              </span>
+              <div className="flex gap-2 items-center">
+                <Mail size={16} />
+                rekayasakeolahragaan@itera.ac.id
+              </div>
             </div>
 
-            <div className="flex gap-2 items-center">
-              <Mail size={16} />
-              rekayasakeolahragaan@itera.ac.id
+            {/* SOCIAL */}
+            <div className="flex gap-3 mt-6">
+              {[ 
+                { icon: <Instagram size={18} />, link: "#" },
+                { icon: <Linkedin size={18} />, link: "#" },
+                { icon: <Youtube size={18} />, link: "#" },
+              ].map((item, i) => (
+                <a
+                  key={i}
+                  href={item.link}
+                  target="_blank"
+                  className="
+                    w-10 h-10 flex items-center justify-center
+                    rounded-full border border-gray-200
+                    text-gray-500
+                    hover:bg-orange-600 hover:text-white
+                    hover:scale-105
+                    transition
+                  "
+                >
+                  {item.icon}
+                </a>
+              ))}
             </div>
 
           </div>
 
-          {/* SOCIAL */}
-          <div className="flex gap-4 mt-5">
+        </div>
 
-            <a
-              href="https://www.instagram.com/rekayasa_keolahragaan"
-              target="_blank"
-              className="w-10 h-10 flex items-center justify-center rounded-full border border-gray-300 hover:bg-orange-600 hover:text-white transition"
-            >
-              <Instagram size={18} />
-            </a>
-
-            <a
-              href="#"
-              target="_blank"
-              className="w-10 h-10 flex items-center justify-center rounded-full border border-gray-300 hover:bg-orange-600 hover:text-white transition"
-            >
-              <Linkedin size={18} />
-            </a>
-
-            <a
-              href="https://www.youtube.com/@rekayasakeolahragaan"
-              target="_blank"
-              className="w-10 h-10 flex items-center justify-center rounded-full border border-gray-300 hover:bg-orange-600 hover:text-white transition"
-            >
-              <Youtube size={18} />
-            </a>
-
-          </div>
+        {/* COPYRIGHT */}
+        <div className="mt-16 pt-6 border-t border-gray-200 text-center text-xs text-gray-400">
+          © {new Date().getFullYear()}{" "}
+          <span className="font-medium text-gray-600">
+            Rekayasa Keolahragaan ITERA
+          </span>
         </div>
 
       </div>
 
-      {/* COPYRIGHT */}
-      <div className="mt-12 pt-6 border-t border-gray-200 text-center text-xs text-gray-500">
-        © {new Date().getFullYear()}{" "}
-        <strong>Rekayasa Keolahragaan ITERA</strong>. Semua Hak Cipta Dilindungi.
-      </div>
-
-      {/* BACK TO TOP */}
+      {/* BACK TO TOP (clean version) */}
       {showTop && (
         <button
           onClick={scrollTop}
-          className="fixed bottom-6 right-6 bg-orange-600 hover:bg-orange-700 text-white p-3 rounded-full shadow-lg transition"
+          className="
+            fixed bottom-6 right-6
+            w-11 h-11
+            flex items-center justify-center
+            rounded-full
+            border border-gray-300
+            bg-white
+            text-gray-700
+            hover:bg-gray-100
+            transition
+          "
         >
-          <ArrowUp size={20} />
+          <ArrowUp size={18} />
         </button>
       )}
-
     </footer>
   );
 }

@@ -9,17 +9,17 @@ export default function SejarahPage() {
     {
       year: "2023",
       title: "Pembukaan Program Studi",
-      desc: "Program Studi Rekayasa Keolahragaan resmi dibuka di Institut Teknologi Sumatera berdasarkan SK Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi.",
+      desc: "Program Studi Rekayasa Keolahragaan resmi dibuka berdasarkan SK Kemendikbudristek.",
     },
     {
       year: "2024",
       title: "Penerimaan Mahasiswa Pertama",
-      desc: "Program Studi mulai menerima mahasiswa baru melalui berbagai jalur seleksi nasional seperti SNBT, SNBP, dan jalur Mandiri.",
+      desc: "Mulai menerima mahasiswa melalui jalur SNBT, SNBP, dan Mandiri.",
     },
     {
       year: "Sekarang",
       title: "Pengembangan Kurikulum & Riset",
-      desc: "Program Studi terus berkembang dengan kurikulum berbasis teknologi olahraga, penelitian inovatif, dan kolaborasi industri sport-tech.",
+      desc: "Berfokus pada teknologi olahraga, riset inovatif, dan kolaborasi industri.",
     },
   ];
 
@@ -27,7 +27,7 @@ export default function SejarahPage() {
     <>
       {/* HERO */}
       <section
-        className="relative h-[320px] flex items-center justify-center text-white"
+        className="relative h-[360px] flex items-center justify-center text-white"
         style={{
           backgroundImage:
             "url(https://images.unsplash.com/photo-1599058918144-7573e96b37f1)",
@@ -35,20 +35,21 @@ export default function SejarahPage() {
           backgroundPosition: "center",
         }}
       >
-        <div className="absolute inset-0 bg-black/55" />
+        {/* overlay gradient */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/70" />
 
         <div className="relative text-center px-6">
-          <h1 className="text-4xl md:text-5xl font-extrabold">
+          <h1 className="text-4xl md:text-5xl font-bold tracking-tight">
             Sejarah Program Studi
           </h1>
 
           {/* Breadcrumb */}
-          <div className="mt-4 text-sm text-gray-200 flex justify-center gap-2">
-            <Link href="/" className="hover:text-orange-400">
+          <div className="mt-4 text-sm text-gray-300 flex justify-center gap-2">
+            <Link href="/" className="hover:text-white">
               Beranda
             </Link>
             <span>/</span>
-            <Link href="/profil" className="hover:text-orange-400">
+            <Link href="/profil" className="hover:text-white">
               Profil
             </Link>
             <span>/</span>
@@ -58,75 +59,79 @@ export default function SejarahPage() {
       </section>
 
       {/* CONTENT */}
-      <section className="section bg-white">
-        <div className="max-w-6xl mx-auto px-6">
+      <section className="bg-white py-28">
+        <div className="max-w-5xl mx-auto px-6">
 
           {/* DESKRIPSI */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="max-w-4xl mx-auto text-gray-700 leading-relaxed text-justify space-y-6 mb-20"
+            transition={{ duration: 0.5 }}
+            className="text-gray-600 leading-relaxed space-y-6 mb-24"
           >
             <p>
               Program Studi Rekayasa Keolahragaan di Institut Teknologi Sumatera
-              (ITERA) merupakan langkah strategis dalam pengembangan ilmu dan
-              teknologi di bidang olahraga. Program studi ini resmi dibuka pada
-              tahun <strong>2023</strong> berdasarkan Surat Keputusan
-              Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi.
+              merupakan langkah strategis dalam pengembangan ilmu dan teknologi
+              olahraga di Indonesia.
             </p>
 
             <p>
-              Sejak saat itu, ITERA menjadi salah satu perguruan tinggi di
-              Indonesia yang menawarkan pendekatan rekayasa dalam dunia
-              keolahragaan. Kehadiran program studi ini menjadi bagian dari
-              pengembangan ilmu yang mengintegrasikan teknologi dengan ilmu
-              olahraga untuk meningkatkan performa atlet serta inovasi
-              peralatan olahraga berbasis teknologi.
+              Program ini resmi dibuka pada tahun <strong>2023</strong> sebagai
+              bentuk integrasi antara rekayasa teknologi dan ilmu keolahragaan
+              untuk meningkatkan performa atlet serta inovasi peralatan olahraga.
             </p>
 
             <p>
-              Memasuki tahun <strong>2024 hingga sekarang</strong>, Program Studi
-              Rekayasa Keolahragaan telah aktif menerima mahasiswa melalui jalur
-              seleksi nasional seperti <strong>SNBT, SNBP, dan Mandiri</strong>.
-              Hal ini menunjukkan komitmen ITERA dalam menyediakan pendidikan
-              tinggi yang berkualitas di bidang rekayasa olahraga.
-            </p>
-
-            <p>
-              Dengan kurikulum yang dirancang untuk menjawab tantangan era
-              modern serta didukung oleh tenaga pengajar profesional, prodi ini
-              diharapkan mampu mencetak lulusan yang unggul, inovatif, dan siap
-              bersaing di dunia industri olahraga baik nasional maupun
-              internasional.
+              Hingga saat ini, program studi terus berkembang dengan kurikulum
+              berbasis teknologi, riset inovatif, serta kolaborasi industri
+              sport-tech.
             </p>
           </motion.div>
 
           {/* TIMELINE */}
-          <div className="grid md:grid-cols-3 gap-8">
-            {timeline.map((item, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: i * 0.1 }}
-                viewport={{ once: true }}
-                className="bg-gray-50 p-8 rounded-2xl shadow-sm hover:shadow-lg transition"
-              >
-                <div className="flex items-center gap-2 text-orange-600 font-semibold mb-3">
-                  <Calendar size={18} />
-                  {item.year}
-                </div>
+          <div className="relative">
 
-                <h3 className="font-bold text-lg text-gray-900">
-                  {item.title}
-                </h3>
+            {/* LINE */}
+            <div className="absolute left-3 top-0 bottom-0 w-px bg-gray-200" />
 
-                <p className="text-gray-600 mt-3 text-sm leading-relaxed">
-                  {item.desc}
-                </p>
-              </motion.div>
-            ))}
+            <div className="space-y-12">
+
+              {timeline.map((item, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.4, delay: i * 0.1 }}
+                  viewport={{ once: true }}
+                  className="relative pl-10"
+                >
+
+                  {/* DOT */}
+                  <div className="absolute left-0 top-1 w-6 h-6 rounded-full border border-gray-300 bg-white flex items-center justify-center">
+                    <Calendar size={14} className="text-gray-500" />
+                  </div>
+
+                  {/* CONTENT */}
+                  <div className="border border-gray-200 rounded-2xl p-6 bg-white">
+
+                    <div className="text-sm text-orange-600 font-medium mb-1">
+                      {item.year}
+                    </div>
+
+                    <h3 className="text-lg font-semibold text-gray-900">
+                      {item.title}
+                    </h3>
+
+                    <p className="text-gray-500 mt-2 text-sm leading-relaxed">
+                      {item.desc}
+                    </p>
+
+                  </div>
+
+                </motion.div>
+              ))}
+
+            </div>
           </div>
 
         </div>

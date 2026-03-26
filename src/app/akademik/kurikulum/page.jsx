@@ -104,10 +104,11 @@ export default function KurikulumPage() {
     },
   ];
 
+  // ✅ FIX: cuma satu coreCourses
   const coreCourses = [
     "Algoritma dan Pemrograman",
     "Matematika Teknik",
-    "Implementasi Biomekanika",
+    "Biomekanika",
     "Sensor dan IoT",
     "Desain dan Manufaktur",
     "Gizi dan Doping",
@@ -115,104 +116,105 @@ export default function KurikulumPage() {
     "Teknik Komputasi",
     "Analisis Performa",
     "Ergonomi",
-    "Kecerdasan Buatan Keolahragaan",
+    "AI Keolahragaan",
     "Pemodelan dan Optimasi",
     "Tes dan Pengukuran",
   ];
 
   return (
-    <main className="bg-gray-50 min-h-screen">
+    <main className="bg-white min-h-screen">
 
       {/* HERO */}
-      <section
-        className="relative h-[280px] flex items-center justify-center text-white"
-        style={{
-          backgroundImage:
-            "url(https://images.unsplash.com/photo-1523240795612-9a054b0db644)",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      >
-        <div className="absolute inset-0 bg-black/60"></div>
+      <section className="relative h-[300px] flex items-center justify-center text-white">
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{
+            backgroundImage:
+              "url(https://images.unsplash.com/photo-1523240795612-9a054b0db644)",
+          }}
+        />
+        <div className="absolute inset-0 bg-black/60" />
 
         <div className="relative text-center px-6">
-          <h1 className="text-3xl md:text-4xl font-extrabold">
-            Kurikulum
-          </h1>
-
-          <p className="text-sm mt-2 text-gray-200">
+          <h1 className="text-4xl font-semibold">Kurikulum</h1>
+          <p className="text-sm text-gray-300 mt-2">
             Akademik / Kurikulum
           </p>
         </div>
       </section>
 
-      <div className="max-w-6xl mx-auto px-6 py-16">
+      <div className="max-w-6xl mx-auto px-6 py-20">
 
-        {/* DESCRIPTION */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-2xl md:text-3xl font-bold text-orange-600">
-            Kurikulum Program Studi Rekayasa Keolahragaan
+        {/* INTRO */}
+        <div className="max-w-3xl mx-auto text-center mb-16">
+          <h2 className="text-3xl font-semibold text-gray-900">
+            Kurikulum Rekayasa Keolahragaan
           </h2>
 
-          <p className="mt-4 text-gray-700 leading-relaxed">
-            Program Studi Rekayasa Keolahragaan memiliki kurikulum yang
-            dirancang untuk menghasilkan lulusan yang mampu mengintegrasikan
-            teknologi dengan ilmu olahraga. Total beban studi yang harus
-            ditempuh mahasiswa adalah <strong>144 SKS</strong> selama
-            <strong> 8 semester</strong>.
+          <p className="mt-4 text-gray-500 leading-relaxed">
+            Kurikulum dirancang untuk mengintegrasikan teknologi dengan ilmu olahraga
+            dalam 8 semester dengan total 144 SKS.
           </p>
         </div>
 
-        {/* CORE COURSES */}
+        {/* CORE */}
         <section className="mb-20">
-
-          <h3 className="text-xl font-bold text-orange-600 mb-6 flex items-center gap-2">
-            <GraduationCap size={20} />
+          <h3 className="flex items-center gap-2 text-lg font-semibold text-gray-900 mb-6">
+            <GraduationCap size={18} />
             Mata Kuliah Inti
           </h3>
 
-          <div className="grid md:grid-cols-3 gap-4">
+          <div className="flex flex-wrap gap-3">
             {coreCourses.map((course, i) => (
-              <motion.div
+              <span
                 key={i}
-                whileHover={{ scale: 1.03 }}
-                className="bg-white shadow-md rounded-xl p-4 border-l-4 border-orange-500"
+                className="
+                  px-4 py-2
+                  rounded-full
+                  border border-gray-200
+                  text-sm text-gray-700
+                  hover:bg-gray-100
+                  transition
+                "
               >
                 {course}
-              </motion.div>
+              </span>
             ))}
           </div>
-
         </section>
 
-        {/* SEMESTER CURRICULUM */}
+        {/* SEMESTER */}
         <section>
-
-          <h3 className="text-xl font-bold text-orange-600 mb-8 flex items-center gap-2">
-            <BookOpen size={20} />
-            Struktur Kurikulum per Semester
+          <h3 className="flex items-center gap-2 text-lg font-semibold text-gray-900 mb-8">
+            <BookOpen size={18} />
+            Struktur Semester
           </h3>
 
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid md:grid-cols-2 gap-6">
 
             {semesters.map((sem, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, y: 25 }}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
+                transition={{ duration: 0.4 }}
                 viewport={{ once: true }}
-                className="bg-white rounded-2xl shadow-md p-6"
+                className="
+                  border border-gray-200
+                  rounded-2xl
+                  p-6
+                "
               >
-                <h4 className="font-bold text-lg text-orange-600 mb-4">
+
+                <h4 className="font-semibold text-gray-900 mb-4">
                   {sem.semester}
                 </h4>
 
-                <ul className="space-y-2 text-gray-700 text-sm">
-                  {sem.courses.map((course, index) => (
-                    <li key={index} className="flex gap-2">
-                      <span className="text-orange-600 font-bold">•</span>
-                      {course}
+                <ul className="space-y-2 text-sm text-gray-600">
+                  {sem.courses.map((c, idx) => (
+                    <li key={idx} className="flex gap-2">
+                      <span className="text-gray-400">•</span>
+                      {c}
                     </li>
                   ))}
                 </ul>
@@ -221,7 +223,6 @@ export default function KurikulumPage() {
             ))}
 
           </div>
-
         </section>
 
       </div>

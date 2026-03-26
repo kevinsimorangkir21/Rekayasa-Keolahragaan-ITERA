@@ -5,7 +5,6 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 
 export default function StaffDosenPage() {
-
   const dosenList = [
     {
       nama: "Erny Amalia L, M.Pd.",
@@ -57,29 +56,24 @@ export default function StaffDosenPage() {
       .trim();
 
   return (
-    <section className="bg-gray-50 py-24">
-
+    <section className="bg-white py-28">
       <div className="max-w-7xl mx-auto px-6">
 
-        {/* TITLE */}
+        {/* HEADER */}
         <div className="text-center mb-16">
-
-          <h1 className="text-4xl font-bold text-orange-600">
+          <h1 className="text-4xl font-semibold text-gray-900">
             Staff Dosen
           </h1>
 
-          <p className="text-gray-600 mt-3">
+          <p className="text-gray-500 mt-3">
             Program Studi Rekayasa Keolahragaan ITERA
           </p>
-
         </div>
 
-
-        {/* GRID DOSEN */}
+        {/* GRID */}
         <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
 
           {dosenList.map((dosen, i) => (
-
             <Link
               key={i}
               href={`/profil/staff-dosen/${slugify(dosen.nama)}`}
@@ -87,71 +81,56 @@ export default function StaffDosenPage() {
             >
 
               <motion.div
-                initial={{ opacity: 0, y: 40 }}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: i * 0.05 }}
+                transition={{ duration: 0.4, delay: i * 0.05 }}
                 viewport={{ once: true }}
                 className="
-                relative
-                h-[380px]
-                rounded-2xl
-                overflow-hidden
-                shadow-lg
-                hover:shadow-2xl
-                transition
+                  border border-gray-200
+                  rounded-2xl
+                  overflow-hidden
+                  bg-white
+                  transition
+                  hover:-translate-y-1
                 "
               >
 
-                {/* FOTO DOSEN */}
-                <Image
-                  src={dosen.foto}
-                  alt={dosen.nama}
-                  fill
-                  className="
-                  object-cover
-                  object-[center_20%]
-                  group-hover:scale-110
-                  transition duration-500
-                  "
-                />
-
-                {/* OVERLAY */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+                {/* IMAGE */}
+                <div className="relative h-[260px] overflow-hidden">
+                  <Image
+                    src={dosen.foto}
+                    alt={dosen.nama}
+                    fill
+                    className="
+                      object-cover
+                      object-[center_20%]
+                      group-hover:scale-105
+                      transition duration-500
+                    "
+                  />
+                </div>
 
                 {/* INFO */}
-                <div
-                  className="
-                  absolute bottom-0 w-full
-                  translate-y-full
-                  group-hover:translate-y-0
-                  transition duration-500
-                  "
-                >
+                <div className="p-5 text-center">
 
-                  <div className="bg-orange-600 text-white text-center py-5 px-4">
+                  <h3 className="font-semibold text-gray-900 leading-tight">
+                    {dosen.nama}
+                  </h3>
 
-                    <h3 className="font-semibold text-lg leading-tight">
-                      {dosen.nama}
-                    </h3>
-
-                    <p className="text-sm opacity-90">
-                      {dosen.jabatan}
-                    </p>
-
-                  </div>
+                  <p className="text-sm text-gray-500 mt-1">
+                    {dosen.jabatan}
+                  </p>
 
                 </div>
 
               </motion.div>
 
             </Link>
-
           ))}
 
         </div>
 
       </div>
-
     </section>
   );
 }

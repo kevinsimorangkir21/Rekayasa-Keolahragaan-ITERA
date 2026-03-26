@@ -1,14 +1,13 @@
 "use client";
 import { motion } from "framer-motion";
 
-export default function Stats() {
-  const stats = [
-    { value: "60+", label: "Students" },
-    { value: "5+", label: "Lecturer" },
-  ];
+export default function Fact({ data }) {
+
+  const stats = data?.items || [];
 
   return (
     <section className="relative py-28 overflow-hidden bg-gradient-to-r from-orange-500 to-orange-600 text-white">
+
       <div className="max-w-6xl mx-auto px-6 relative z-10">
 
         <div className="grid md:grid-cols-2 gap-16 items-center">
@@ -17,13 +16,11 @@ export default function Stats() {
           <div>
 
             <h2 className="text-3xl md:text-4xl font-extrabold">
-              Sports Engineering People
+              {data?.title || "Sports Engineering People"}
             </h2>
 
             <p className="mt-5 leading-relaxed text-orange-100 max-w-lg">
-              Komunitas mahasiswa dan dosen yang berperan aktif dalam
-              pengembangan rekayasa olahraga di Indonesia melalui inovasi
-              teknologi, sport science, dan penelitian di bidang olahraga.
+              {data?.description || "Deskripsi belum diisi"}
             </p>
 
           </div>
@@ -51,12 +48,19 @@ export default function Stats() {
               </motion.div>
             ))}
 
+            {/* fallback */}
+            {stats.length === 0 && (
+              <p className="text-white/70">
+                Belum ada data stats
+              </p>
+            )}
+
           </div>
 
         </div>
       </div>
 
-      {/* Wave */}
+      {/* WAVE */}
       <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-[0]">
         <svg
           className="relative block w-full h-24 text-orange-500"

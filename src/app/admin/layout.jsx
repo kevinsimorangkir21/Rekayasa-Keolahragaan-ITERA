@@ -1,143 +1,224 @@
 "use client";
-import { useState, useEffect } from "react";
+
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import {
-  Home,
+  LayoutDashboard,
   Users,
-  Building2,
-  Briefcase,
-  FileText,
-  Bell,
+  Newspaper,
+  CalendarDays,
+  GraduationCap,
+  Home,
+  Settings,
+  UserPlus,
   LogOut,
-  ClipboardList,
-  MessageSquare,
-  BarChart3,
+  Bell,
+  ChevronDown,
+  AlertCircle,
 } from "lucide-react";
+import { useState, useEffect } from "react";
 
 export default function AdminLayout({ children }) {
   const pathname = usePathname();
-  const [showNotif, setShowNotif] = useState(false);
+  const router = useRouter();
 
-  const menuItems = [
+  const [openProfil, setOpenProfil] = useState(false);
+  const [openAkademik, setOpenAkademik] = useState(false);
+
+  useEffect(() => {
+    if (pathname.startsWith("/admin/profil")) setOpenProfil(true);
+    if (pathname.startsWith("/admin/akademik")) setOpenAkademik(true);
+  }, [pathname]);
+
+  const menus = [
+    { name: "Dashboard", href: "/admin", icon: LayoutDashboard },
+    { name: "Edit Home", href: "/admin/home", icon: Home },
+
     {
-      section: "Manajemen",
-      items: [
-        { href: "/admin", label: "Dashboard", icon: Home },
-        { href: "/admin/peserta", label: "Peserta", icon: Users },
-        { href: "/admin/perusahaan", label: "Perusahaan", icon: Building2 },
-        { href: "/admin/lowongan", label: "Lowongan", icon: Briefcase },
-        { href: "/admin/lamaran", label: "Lamaran", icon: FileText },
+      name: "Profil",
+      icon: Users,
+      key: "profil",
+      children: [
+        { name: "Sejarah", href: "/admin/profil/sejarah" },
+        { name: "Visi Misi", href: "/admin/profil/visi-misi" },
+        { name: "Staff Dosen", href: "/admin/profil/staff-dosen" },
+        { name: "Prestasi Mahasiswa", href: "/admin/profil/prestasi" },
       ],
     },
+
+    { name: "Berita", href: "/admin/berita", icon: Newspaper },
+    { name: "Event", href: "/admin/event", icon: CalendarDays },
+    { name: "Pengaduan", href: "/admin/pengaduan", icon: AlertCircle },
+
     {
-      section: "Magang & Laporan",
-      items: [
-        {
-          href: "/admin/laporan",
-          label: "Laporan Magang",
-          icon: ClipboardList,
-        },
-        {
-          href: "/admin/feedback",
-          label: "Feedback",
-          icon: MessageSquare,
-        },
-        {
-          href: "/admin/status",
-          label: "Status Lamaran",
-          icon: BarChart3,
-        },
+      name: "Akademik",
+      icon: GraduationCap,
+      key: "akademik",
+      children: [
+        { name: "Kurikulum", href: "/admin/akademik/kurikulum" },
+        { name: "Jadwal Kuliah", href: "/admin/akademik/jadwal" },
+        { name: "Dokumen Akademik", href: "/admin/akademik/dokumen" },
+        { name: "Kalender Akademik", href: "/admin/akademik/kalender" },
+        { name: "Kerja Praktik", href: "/admin/akademik/kp" },
+        { name: "Kuliah Kerja Nyata", href: "/admin/akademik/kkn" },
+        { name: "Ujian Akhir", href: "/admin/akademik/ujian" },
       ],
     },
-    {
-      section: "Sistem",
-      items: [
-        { href: "/admin/notifikasi", label: "Notifikasi", icon: Bell },
-      ],
-    },
+
+    { name: "Admin Account", href: "/admin/akun", icon: UserPlus },
+    { name: "Pengaturan", href: "/admin/pengaturan", icon: Settings },
   ];
 
-  return (
-    <div className="min-h-screen flex bg-gray-50 dark:bg-[#0b0f15] text-gray-800 dark:text-gray-100">
-      {/* Sidebar */}
-      <aside className="w-72 sticky top-0 h-screen bg-white dark:bg-[#141a23] border-r border-gray-200 dark:border-gray-800 flex flex-col justify-between shadow-md">
-        <div className="p-6 overflow-y-auto">
-          <h1 className="text-xl font-bold mb-8 text-blue-600 dark:text-blue-400">
-            MagangHub Admin
-          </h1>
+  const toggleDropdown = (key) => {
+    if (key === "profil") setOpenProfil(!openProfil);
+    if (key === "akademik") setOpenAkademik(!openAkademik);
+  };
 
-          {menuItems.map((section, idx) => (
-            <div key={idx} className="mb-6">
-              <h3 className="text-xs font-semibold text-gray-500 dark:text-gray-400 mb-2 uppercase tracking-wide">
-                {section.section}
-              </h3>
-              <ul className="space-y-1.5">
-                {section.items.map((item) => (
-                  <li key={item.href}>
-                    <Link
-                      href={item.href}
-                      className={`flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-all duration-200 ${
-                        pathname === item.href
-                          ? "bg-blue-50 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400"
-                          : "hover:bg-gray-100 dark:hover:bg-white/5 text-gray-700 dark:text-gray-300"
-                      }`}
-                    >
-                      <item.icon className="w-4 h-4" />
-                      {item.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+  const isOpen = (key) => {
+    if (key === "profil") return openProfil;
+    if (key === "akademik") return openAkademik;
+  };
+
+  return (
+    <div className="bg-gray-50 min-h-screen flex">
+
+      {/* SIDEBAR */}
+      <aside className="w-64 h-screen bg-white border-r border-gray-200 flex flex-col fixed">
+
+        {/* HEADER SIDEBAR */}
+        <div className="p-6 border-b border-gray-100">
+          <h1 className="text-lg font-semibold text-gray-900">
+            Admin Panel
+          </h1>
+          <p className="text-xs text-gray-400">
+            Content Management
+          </p>
         </div>
 
-        <div className="p-6 border-t border-gray-100 dark:border-gray-800">
-          <button className="flex items-center gap-2 px-3 py-2 text-sm text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition">
-            <LogOut className="w-4 h-4" />
-            Keluar
+        {/* MENU SCROLL AREA */}
+        <div className="flex-1 overflow-y-auto px-3 py-4 space-y-1">
+
+          {menus.map((menu, idx) => {
+            const Icon = menu.icon;
+
+            if (!menu.children) {
+              const active = pathname === menu.href;
+
+              return (
+                <Link
+                  key={idx}
+                  href={menu.href}
+                  className={`flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm transition
+                  ${
+                    active
+                      ? "bg-orange-500 text-white"
+                      : "text-gray-600 hover:bg-gray-100"
+                  }`}
+                >
+                  <Icon size={18} />
+                  {menu.name}
+                </Link>
+              );
+            }
+
+            const activeParent = menu.children.some((c) =>
+              pathname.startsWith(c.href)
+            );
+
+            return (
+              <div key={idx}>
+                <button
+                  onClick={() => toggleDropdown(menu.key)}
+                  className={`w-full flex items-center justify-between px-4 py-2.5 rounded-xl text-sm transition
+                  ${
+                    activeParent
+                      ? "bg-orange-100 text-orange-600"
+                      : "text-gray-600 hover:bg-gray-100"
+                  }`}
+                >
+                  <div className="flex items-center gap-3">
+                    <Icon size={18} />
+                    {menu.name}
+                  </div>
+
+                  <ChevronDown
+                    size={16}
+                    className={`transition ${
+                      isOpen(menu.key) ? "rotate-180" : ""
+                    }`}
+                  />
+                </button>
+
+                {isOpen(menu.key) && (
+                  <div className="ml-8 mt-1 space-y-1">
+                    {menu.children.map((child, i) => {
+                      const active = pathname === child.href;
+
+                      return (
+                        <Link
+                          key={i}
+                          href={child.href}
+                          className={`block px-3 py-2 rounded-lg text-sm transition
+                          ${
+                            active
+                              ? "bg-orange-500 text-white"
+                              : "text-gray-600 hover:bg-gray-100"
+                          }`}
+                        >
+                          {child.name}
+                        </Link>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
+            );
+          })}
+
+        </div>
+
+        {/* LOGOUT FIXED */}
+        <div className="p-4 border-t border-gray-100">
+          <button
+            onClick={() => router.push("/login")}
+            className="flex items-center gap-2 text-sm text-red-500"
+          >
+            <LogOut size={16} />
+            Logout
           </button>
         </div>
+
       </aside>
 
-      {/* Konten Utama */}
-      <main className="flex-1 flex flex-col">
-        {/* Header */}
-        <header className="sticky top-0 z-40 flex items-center justify-between px-10 py-4 border-b border-gray-200 dark:border-gray-800 bg-white/80 dark:bg-[#141a23]/80 backdrop-blur-md">
-          <h2 className="font-semibold text-lg capitalize">
-            {pathname.split("/").pop() || "Dashboard Admin"}
+      {/* MAIN */}
+      <div className="flex-1 ml-64">
+
+        {/* HEADER FIXED */}
+        <header className="fixed top-0 left-64 right-0 h-16 bg-white border-b border-gray-200 flex items-center justify-between px-6 z-40">
+          <h2 className="text-lg font-semibold capitalize">
+            {pathname.split("/").pop() || "Dashboard"}
           </h2>
 
-          <div className="flex items-center gap-6">
-            {/* Notifikasi */}
-            <button
-              onClick={() => setShowNotif(!showNotif)}
-              className="relative"
-            >
-              <Bell className="w-6 h-6 text-gray-600 dark:text-gray-300 hover:text-blue-500 transition" />
-              <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-red-500 rounded-full"></span>
-            </button>
+          <div className="flex items-center gap-4">
+            <Bell className="w-5 h-5 text-gray-500" />
 
-            {/* Profil Admin */}
-            <div className="flex items-center gap-3">
-              <img
-                src="/avatar.jpg"
-                alt="Admin"
-                className="w-9 h-9 rounded-full border border-gray-300 dark:border-gray-700"
-              />
-              <span className="text-sm font-medium">Admin MagangHub</span>
+            <div className="flex items-center gap-2">
+              <div className="w-9 h-9 bg-orange-500 text-white flex items-center justify-center rounded-full text-sm font-semibold">
+                A
+              </div>
+              <span className="text-sm">Admin</span>
             </div>
           </div>
         </header>
 
-        {/* Isi Halaman */}
-        <div className="flex-1 p-10 overflow-y-auto">
-          <div className="max-w-6xl mx-auto bg-white dark:bg-[#141a23] p-8 rounded-2xl shadow-md border border-gray-100 dark:border-gray-800">
+        {/* CONTENT */}
+        <main className="pt-20 p-6">
+          <div className="bg-white border border-gray-200 rounded-2xl p-6">
             {children}
           </div>
-        </div>
-      </main>
+        </main>
+
+      </div>
     </div>
   );
 }

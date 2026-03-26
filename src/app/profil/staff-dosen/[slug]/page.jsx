@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Mail, ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { use } from "react";
+import Image from "next/image";
 
 export default function DosenDetail({ params }) {
   const { slug } = use(params);
@@ -79,83 +80,89 @@ export default function DosenDetail({ params }) {
 
   if (!dosen) {
     return (
-      <div className="pt-24 text-center text-gray-600">
+      <div className="pt-32 text-center text-gray-500">
         Data dosen tidak ditemukan
       </div>
     );
   }
 
   return (
-    <main className="pt-24 bg-gray-50 text-gray-900 min-h-screen">
-      <div className="max-w-6xl mx-auto px-6 py-12">
+    <main className="bg-white min-h-screen py-28">
+      <div className="max-w-5xl mx-auto px-6">
 
-        {/* Breadcrumb */}
-        <div className="flex flex-wrap items-center justify-between gap-3 mb-10">
-          <div className="text-sm text-gray-500">
-            <Link href="/profil/staff-dosen" className="hover:text-orange-500">
-              Staff Dosen
-            </Link>
-            <span className="mx-2">/</span>
-            <span className="font-medium text-gray-700">
-              {dosen.nama}
-            </span>
-          </div>
+        {/* TOP BAR */}
+        <div className="flex justify-between items-center mb-12">
 
           <Link
             href="/profil/staff-dosen"
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-lg
-            bg-gray-200 text-gray-700 hover:bg-gray-300 transition text-sm"
+            className="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-gray-900"
           >
-            <ArrowLeft size={16} /> Kembali
+            <ArrowLeft size={16} />
+            Kembali
           </Link>
+
         </div>
 
-        {/* CONTENT */}
-        <div className="flex flex-col md:flex-row gap-10">
+        {/* PROFILE */}
+        <div className="grid md:grid-cols-3 gap-10 items-start">
 
           {/* FOTO */}
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            className="w-full md:w-1/3 rounded-xl overflow-hidden shadow-lg"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="border border-gray-200 rounded-2xl overflow-hidden"
           >
-            <img
-              src={dosen.foto}
-              alt={dosen.nama}
-              className="w-full h-full object-cover"
-            />
+            <div className="relative h-[360px]">
+              <Image
+                src={dosen.foto}
+                alt={dosen.nama}
+                fill
+                className="object-cover object-[center_20%]"
+              />
+            </div>
           </motion.div>
 
           {/* INFO */}
           <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            className="w-full md:w-2/3 space-y-4"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="md:col-span-2 space-y-6"
           >
-            <h1 className="text-3xl md:text-4xl font-extrabold text-orange-600">
-              {dosen.nama}
-            </h1>
 
-            <p className="text-gray-700 font-medium">
-              Dosen Program Studi Rekayasa Keolahragaan
-            </p>
+            <div>
+              <h1 className="text-3xl font-semibold text-gray-900">
+                {dosen.nama}
+              </h1>
 
-            <div className="mt-6 space-y-4 text-gray-700">
-              <InfoRow label="NIP/NRK" value={dosen.nip} />
-              <InfoRow label="Pendidikan" value={dosen.pendidikan} />
-              <InfoRow label="Fokus Riset" value={dosen.fokus} />
+              <p className="text-gray-500 mt-1">
+                Dosen Rekayasa Keolahragaan ITERA
+              </p>
             </div>
 
-            <div className="pt-3">
-              <a
-                href={`mailto:${slug}@itera.ac.id`}
-                className="inline-flex items-center gap-2 text-sm hover:text-orange-500"
-              >
-                <Mail size={18} /> {slug}@itera.ac.id
-              </a>
+            {/* DATA */}
+            <div className="border border-gray-200 rounded-2xl divide-y">
+
+              <Info label="NIP / NRK" value={dosen.nip} />
+              <Info label="Pendidikan" value={dosen.pendidikan} />
+              <Info label="Fokus Riset" value={dosen.fokus} />
+
             </div>
+
+            {/* EMAIL */}
+            <a
+              href={`mailto:${slug}@itera.ac.id`}
+              className="
+                inline-flex items-center gap-2
+                px-4 py-2 rounded-full
+                border border-gray-300
+                text-sm text-gray-700
+                hover:bg-gray-100
+                transition
+              "
+            >
+              <Mail size={16} />
+              {slug}@itera.ac.id
+            </a>
 
           </motion.div>
 
@@ -166,13 +173,13 @@ export default function DosenDetail({ params }) {
   );
 }
 
-function InfoRow({ label, value }) {
+function Info({ label, value }) {
   return (
-    <div className="flex gap-4 text-sm items-start">
-      <span className="w-36 font-semibold">
-        {label} :
+    <div className="flex justify-between px-5 py-4 text-sm">
+      <span className="text-gray-400">{label}</span>
+      <span className="text-gray-900 font-medium text-right max-w-[60%]">
+        {value}
       </span>
-      <span className="flex-1 leading-relaxed">{value}</span>
     </div>
   );
 }

@@ -9,28 +9,23 @@ export default function BeritaPage() {
 
   const news = [
     {
-      slug: "webinar-rekayasa-keolahragaan-itera-hadirkan-ketua-harian-koni-lampung",
-      title: "Webinar Rekayasa Keolahragaan ITERA Hadirkan Ketua Harian KONI Lampung",
+      slug: "webinar",
+      title: "Webinar Rekayasa Keolahragaan ITERA",
       date: "06 Mei 2025",
       tag: "Webinar",
       img: "/berita/webinar.png",
-      content: `
-      Mediaolahraga.id, 28 November 2024 – Ketua Harian KONI Lampung, BRIGJEN TNI (Purn.) Amalsyah Tarmizi, S.I.P berkesempatan menjadi pembicara utama dalam acara Stadium General bertajuk “Transformasi Performa Olahraga Melalui Teknologi”. Acara ini diselenggarakan oleh Fakultas Teknik Industri (FTI) Program Studi Rekayasa Keolahragaan, Institut Teknologi Sumatera (ITERA).
-      `
+      featured: true,
     },
     {
-      slug: "dibuka-program-studi-rekayasa-keolahragaan-itera-siap-cetak-atlet-berbasis-teknologi",
-      title: "Dibuka Program Studi Rekayasa Keolahragaan ITERA, Siap Cetak Atlet Berbasis Teknologi",
+      slug: "dibuka",
+      title: "Dibuka Program Studi Rekayasa Keolahragaan ITERA",
       date: "16 Mei 2023",
       tag: "Pengumuman",
       img: "/berita/dibuka.png",
-      content: `
-      Dengan mengucapkan rasa syukur ‘Alhamdulillah’ kepada tuhan yang Maha Esa, Per tanggal 16 Mei 2023, menyatakan bahwa ;
-      `
     },
   ];
 
-  const tags = ["Semua", "Webinar", "Pengumuman", "Prestasi", "Penelitian", "Kerjasama"];
+  const tags = ["Semua", "Webinar", "Pengumuman", "Prestasi"];
 
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("Semua");
@@ -56,51 +51,45 @@ export default function BeritaPage() {
   const featured = news.find((n) => n.featured);
 
   return (
-    <main className="bg-gray-50 min-h-screen">
+    <main className="bg-white min-h-screen">
 
       {/* HERO */}
-      <section
-        className="relative h-[280px] bg-cover bg-center flex items-center"
-        style={{
-          backgroundImage:
-            "url(https://images.unsplash.com/photo-1521737711867-e3b97375f902)",
-        }}
-      >
+      <section className="relative h-[300px] flex items-center text-white">
         <div className="absolute inset-0 bg-black/60" />
-
-        <div className="relative z-10 max-w-6xl mx-auto px-6 text-white">
-          <h1 className="text-4xl md:text-5xl font-extrabold">Berita</h1>
-          <p className="text-sm mt-2 text-gray-200">Home / Berita</p>
+        <div className="relative max-w-6xl mx-auto px-6">
+          <h1 className="text-4xl font-semibold">Berita</h1>
+          <p className="text-sm text-gray-300 mt-2">Beranda / Berita</p>
         </div>
       </section>
 
       <section className="py-20">
         <div className="max-w-6xl mx-auto px-6">
 
-          {/* FEATURED NEWS */}
+          {/* FEATURED */}
           {featured && (
             <Link href={`/berita/${featured.slug}`}>
-              <div className="mb-16 relative rounded-2xl overflow-hidden shadow-lg group">
+              <div className="mb-14 border border-gray-200 rounded-2xl overflow-hidden group">
 
                 <div
-                  className="h-[420px] bg-cover bg-center group-hover:scale-105 transition"
+                  className="h-[300px] bg-cover bg-center group-hover:scale-[1.02] transition"
                   style={{ backgroundImage: `url(${featured.img})` }}
                 />
 
-                <div className="absolute inset-0 bg-black/50 flex items-end">
-                  <div className="p-10 text-white">
-                    <span className="bg-orange-600 px-3 py-1 rounded text-xs">
-                      Featured
-                    </span>
+                <div className="p-6">
 
-                    <h2 className="text-3xl font-bold mt-3 max-w-xl">
-                      {featured.title}
-                    </h2>
+                  <span className="text-xs text-gray-500">
+                    Featured
+                  </span>
 
-                    <p className="flex items-center gap-2 mt-3 text-sm text-gray-200">
-                      <CalendarDays size={16} /> {featured.date}
-                    </p>
-                  </div>
+                  <h2 className="text-xl font-semibold text-gray-900 mt-2">
+                    {featured.title}
+                  </h2>
+
+                  <p className="flex items-center gap-2 text-sm text-gray-500 mt-2">
+                    <CalendarDays size={14} />
+                    {featured.date}
+                  </p>
+
                 </div>
 
               </div>
@@ -110,21 +99,21 @@ export default function BeritaPage() {
           {/* SEARCH */}
           <div className="flex items-center gap-4 mb-10">
 
-            <div className="relative w-full md:w-96">
-              <Search className="absolute left-3 top-3 text-gray-400" size={18} />
+            <div className="relative w-full md:w-80">
+              <Search className="absolute left-3 top-3 text-gray-400" size={16} />
               <input
                 type="text"
                 placeholder="Cari berita..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:border-orange-500"
+                className="w-full pl-9 pr-4 py-2.5 rounded-full border border-gray-200 text-sm focus:outline-none"
               />
             </div>
 
           </div>
 
-          {/* TAG FILTER */}
-          <div className="flex flex-wrap gap-3 mb-12">
+          {/* TAG */}
+          <div className="flex flex-wrap gap-2 mb-10">
             {tags.map((tag) => (
               <button
                 key={tag}
@@ -132,11 +121,11 @@ export default function BeritaPage() {
                   setFilter(tag);
                   setPage(1);
                 }}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition
+                className={`px-3 py-1.5 rounded-full text-xs transition
                   ${
                     filter === tag
-                      ? "bg-orange-600 text-white"
-                      : "bg-white text-gray-700 hover:bg-orange-100"
+                      ? "bg-gray-900 text-white"
+                      : "border border-gray-200 text-gray-600 hover:bg-gray-100"
                   }`}
               >
                 {tag}
@@ -144,54 +133,64 @@ export default function BeritaPage() {
             ))}
           </div>
 
-          {/* NEWS GRID */}
-          <motion.div layout className="grid md:grid-cols-3 gap-8">
+          {/* GRID */}
+          <motion.div layout className="grid md:grid-cols-3 gap-6">
+
             {paginatedNews.map((item, i) => (
               <Link key={i} href={`/berita/${item.slug}`}>
+
                 <motion.article
                   layout
-                  className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl hover:-translate-y-2 transition group"
+                  className="
+                    border border-gray-200
+                    rounded-2xl
+                    overflow-hidden
+                    hover:bg-gray-50
+                    transition
+                  "
                 >
 
                   <div
-                    className="h-52 bg-cover bg-center group-hover:scale-105 transition"
+                    className="h-44 bg-cover bg-center"
                     style={{ backgroundImage: `url(${item.img})` }}
                   />
 
-                  <div className="p-6">
+                  <div className="p-5">
 
-                    <span className="text-xs bg-orange-600 text-white px-3 py-1 rounded-full">
+                    <span className="text-xs text-gray-400">
                       {item.tag}
                     </span>
 
-                    <h3 className="mt-4 font-semibold text-lg text-gray-900 group-hover:text-orange-600 transition line-clamp-2">
+                    <h3 className="mt-2 text-sm font-semibold text-gray-900 line-clamp-2">
                       {item.title}
                     </h3>
 
-                    <div className="flex items-center gap-2 text-sm text-gray-500 mt-4">
-                      <CalendarDays size={16} />
+                    <div className="flex items-center gap-2 text-xs text-gray-500 mt-3">
+                      <CalendarDays size={12} />
                       {item.date}
                     </div>
 
                   </div>
 
                 </motion.article>
+
               </Link>
             ))}
+
           </motion.div>
 
           {/* PAGINATION */}
-          <div className="flex justify-center mt-16 gap-3">
+          <div className="flex justify-center mt-12 gap-2">
 
             {Array.from({ length: totalPages }).map((_, i) => (
               <button
                 key={i}
                 onClick={() => setPage(i + 1)}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition
+                className={`px-3 py-1.5 text-xs rounded-full transition
                   ${
                     page === i + 1
-                      ? "bg-orange-600 text-white"
-                      : "bg-white border hover:bg-orange-100"
+                      ? "bg-gray-900 text-white"
+                      : "border border-gray-200 hover:bg-gray-100"
                   }`}
               >
                 {i + 1}
